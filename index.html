@@ -1,369 +1,263 @@
 
 <!DOCTYPE html>
-<html lang="ru" class="dark">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#09090b">
-    <title>Serbka — Умный переводчик сербского для macOS</title>
-    <meta name="description" content="Serbka помогает переводить и изучать сербский язык прямо на Mac. Быстрый перевод слов с помощью сочетания клавиш.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#09090b'
-                    },
-                    keyframes: {
-                        gradientFlow: {
-                            '0%, 100%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' }
-                        }
-                    },
-                    animation: {
-                        'gradient-flow': 'gradientFlow 6s ease infinite'
-                    }
-                }
-            }
-        };
-    </script>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: #09090b;
-            color: #f4f4f5;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        a, button {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .glass {
-            background: rgba(24, 24, 27, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .glass-hover:hover {
-            background: rgba(39, 39, 42, 0.85);
-            border-color: rgba(255, 255, 255, 0.16);
-        }
-
-        .glow {
-            box-shadow: 0 0 80px -20px rgba(139, 92, 246, 0.25);
-        }
-
-        .animated-gradient-text {
-            background-size: 200% auto;
-            background-image: linear-gradient(
-                to right, #c084fc, #818cf8, #f472b6, #c084fc
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientFlow 6s ease infinite;
-        }
-
-        .serbka-tagline {
-            font-weight: 600;
-            letter-spacing: -0.035em;
-            color: #f4f4f5;
-            text-wrap: balance;
-        }
-
-        .serbka-tagline::after {
-            content: "";
-            display: block;
-            width: 64px;
-            height: 2px;
-            margin: 16px auto 0;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #c084fc, #f472b6);
-        }
-
-        .action-link {
-            position: relative;
-            z-index: 20;
-            cursor: pointer;
-            pointer-events: auto;
-        }
-
-        .slide {
-            min-height: 140px;
-        }
-
-        @keyframes gradientFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080910">
+<title>Serbka — Сербский без языкового барьера</title>
+<style>
+:root{--bg:#080910;--panel:#121521;--purple:#a78bfa;--muted:#a7a7bb;--line:#ffffff1c}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 0,#292044,transparent 52%),var(--bg);color:#f8f7ff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.wrap{width:min(1240px,calc(100% - 32px));margin:auto}
+header{height:78px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800}
+.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#d8ccff,#7042e8);font-size:23px}
+.nav{display:flex;gap:25px;font-size:13px;color:#c9c6d9}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:12px;background:#f7f5ff;color:#161321;font-size:13px;font-weight:750;transition:.2s}
+.btn:hover{transform:translateY(-2px);background:#dcd2ff}
+.hero{text-align:center;padding:60px 0 34px}
+.pill{display:inline-block;border:1px solid #b8a4ff40;background:#a78bfa13;color:#d8ccff;padding:9px 14px;border-radius:30px;font-size:12px}
+h1{font-size:clamp(40px,6.5vw,76px);line-height:1.03;letter-spacing:-.065em;max-width:1000px;margin:23px auto 18px}
+.grad{background:linear-gradient(100deg,#fff,#c4b5fd 50%,#9c8aff);color:transparent;background-clip:text;-webkit-background-clip:text}
+.intro{max-width:700px;margin:auto;color:var(--muted);font-size:15px;line-height:1.8}
+.features{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;margin:29px 0}
+.feature{display:flex;align-items:center;gap:9px;font-size:12px;text-align:left}
+.fi{width:36px;height:36px;border-radius:11px;background:#a78bfa15;border:1px solid #a78bfa36;display:grid;place-items:center;font-size:17px}
+.showcase{padding:12px;border:1px solid #b8a4ff50;border-radius:22px;background:#ffffff06;box-shadow:0 20px 80px #0008,0 0 55px #8b5cf61b}
+.chrome{height:38px;display:flex;align-items:center;gap:7px;padding:0 12px;background:#20212c;border-radius:12px 12px 0 0}
+.dotwin{width:10px;height:10px;border-radius:50%}
+.address{margin:auto;border:1px solid #ffffff10;background:#101119;border-radius:7px;padding:5px 42px;color:#89889e;font-size:10px}
+.slide{display:none;animation:appear .35s ease}
+.slide.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.stage{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(240px,.75fr);min-height:450px;overflow:hidden;background:#12131d}
+.demo{position:relative;min-width:0;overflow:hidden;background:#282538;color:#17151a}
+.bookpage{position:absolute;inset:0;background:linear-gradient(90deg,#17151b,#17151b 5%,#e3d5b8 6%,#f3e8d1 17%,#f6ecd8 90%,#b3a181);padding:34px 6% 25px 13%;font-family:Georgia,"Times New Roman",serif;color:#262017;overflow:hidden}
+.bookpage:before{content:"";position:absolute;left:9%;top:0;bottom:0;width:2px;background:#bca989;box-shadow:4px 0 14px #55432b30}
+.booklabel{font:10px Arial,sans-serif;letter-spacing:2px;color:#89795d;text-transform:uppercase}
+.bookpage h3{font-size:clamp(25px,3vw,38px);margin:12px 0 18px;line-height:1.1}
+.bookpage p{font-size:clamp(12px,1.35vw,17px);line-height:1.8;margin:0 0 14px}
+.hl{background:#83aaff;color:#142c57;border-radius:2px;padding:1px 3px}
+.hl-sentence{background:#c7b6fa;padding:2px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl-para{background:#d3c5ff;padding:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.cursor{position:absolute;z-index:4;font:25px Arial,sans-serif;color:#15131b;text-shadow:0 1px white;left:31%;top:39%;transform:rotate(-15deg)}
+.callout{position:absolute;z-index:3;left:30%;top:8%;width:48%;max-width:350px}
+.translation{color:#f6f5ff;background:linear-gradient(145deg,#252936f7,#11131cf7);border:1px solid #ffffff55;border-radius:13px;box-shadow:0 14px 36px #0008;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;backdrop-filter:blur(18px)}
+.tr-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid #ffffff17;color:#b6b5c9;font-size:10px}
+.tr-brand{font-weight:800;letter-spacing:1px;color:#eeeaff}
+.tr-body{padding:12px}
+.tr-word{font-size:clamp(16px,1.8vw,23px);font-weight:750;letter-spacing:-.5px}
+.pron{font-size:10px;color:#aaa9bd;margin-top:3px}
+.kind{display:inline-block;margin-top:7px;padding:4px 6px;border-radius:5px;background:#ffffff12;color:#c5c2d7;font-size:9px}
+.meaning{font-size:14px;line-height:1.5;margin-top:8px}
+.example{margin-top:8px;padding:8px;border:1px solid #ffffff14;border-radius:8px;background:#ffffff06;font-size:10px;line-height:1.55;color:#d4d3e3}
+.example span{color:#aaa9bd}
+.tr-foot{display:flex;justify-content:space-between;border-top:1px solid #ffffff14;margin-top:9px;padding-top:8px;color:#a6a4ba;font-size:9px}
+.sentence-card{position:absolute;z-index:3;left:34%;bottom:5%;width:61%;max-width:410px}
+.paragraph-card{position:absolute;z-index:3;left:14%;bottom:4%;width:63%;max-width:390px}
+.bookpage .page-number{position:absolute;bottom:13px;right:20px;font:11px Arial,sans-serif;color:#8e8066}
+.scene-tag{position:absolute;z-index:5;top:13px;left:13px;background:#11131cdb;border:1px solid #ffffff35;border-radius:8px;padding:7px 9px;color:#f7f4ff;font:10px Arial,sans-serif}
+.info{padding:29px 22px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(155deg,#191b2a,#101119)}
+.kicker{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#c4b5fd;font-weight:800}
+.info h2{font-size:clamp(23px,2.3vw,30px);letter-spacing:-1px;line-height:1.13;margin:14px 0}
+.info p{font-size:12px;line-height:1.8;color:#b2b0c5;margin:0}
+.info ul{list-style:none;margin:19px 0 0;padding:0;display:grid;gap:11px}
+.info li{font-size:11px;color:#d9d7e8;line-height:1.5}
+.check{color:#c4b5fd;margin-right:7px}
+.tip{margin-top:18px;padding:11px;border-radius:10px;border:1px solid #a78bfa30;background:#a78bfa0d;color:#d7caff;font-size:10px;line-height:1.6}
+.controls{display:flex;justify-content:space-between;align-items:center;padding:13px 3px 2px}
+.dots{display:flex;gap:7px}
+.dotbtn{width:7px;height:7px;padding:0;border:0;border-radius:10px;background:#5b596b}
+.dotbtn.active{width:24px;background:#c4b5fd}
+.arrow{border:1px solid #ffffff24;border-radius:9px;background:#ffffff08;color:white;padding:9px 12px;font-size:11px}
+.previews{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:14px}
+.preview{padding:8px;text-align:left;border:1px solid #ffffff20;border-radius:13px;background:#ffffff05;color:white;min-width:0}
+.preview.active{border-color:#a78bfa;box-shadow:0 0 20px #8b5cf638;background:#a78bfa12}
+.thumb{height:85px;border-radius:8px;overflow:hidden;position:relative;background:#262538}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.preview strong{display:block;font-size:11px;margin:9px 2px 5px}
+.preview small{display:block;color:#aaa8bd;font-size:10px;line-height:1.5;margin:0 2px 3px}
+.section{text-align:center;padding:90px 0 25px}
+.section h2{font-size:clamp(30px,4vw,45px);letter-spacing:-1.5px;margin:12px 0}
+.section p{color:var(--muted);font-size:14px;line-height:1.8;max-width:650px;margin:auto}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 75px}
+.card{padding:23px;border:1px solid var(--line);border-radius:15px;background:#ffffff05}
+.card .fi{margin-bottom:15px}
+.card h3{font-size:15px;margin:0 0 9px}
+.card p{font-size:12px;line-height:1.8;color:var(--muted)}
+.cta{padding:48px 20px;text-align:center;border:1px solid #a78bfa35;border-radius:20px;background:radial-gradient(ellipse at 50% 0,#8b5cf62c,transparent 70%),#ffffff04;margin-bottom:70px}
+.cta h2{font-size:clamp(30px,4vw,46px);letter-spacing:-1.5px;margin:0 0 12px}
+.cta p{font-size:13px;color:var(--muted);line-height:1.7;margin:0 auto 24px}
+footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid var(--line);padding:24px 0 30px;color:#858399;font-size:11px}
+footer div{display:flex;gap:20px}
+@media(max-width:800px){.nav{display:none}.hero{padding-top:43px}.stage{grid-template-columns:1fr}.demo{min-height:490px}.info{padding:22px}.info h2{font-size:25px}.cards{grid-template-columns:1fr}.section{padding-top:65px}}
+@media(max-width:520px){.wrap{width:calc(100% - 20px)}header{height:66px}.brand{font-size:19px}.logo{width:34px;height:34px}header .btn{font-size:10px;padding:10px}.hero{padding-top:40px}.intro{font-size:13px}.features{justify-content:flex-start;gap:12px}.feature{font-size:10px}.fi{width:31px;height:31px}.showcase{padding:6px;border-radius:15px}.demo{min-height:440px}.bookpage{padding:30px 4% 25px 10%}.bookpage p{font-size:12px;line-height:1.75}.bookpage h3{font-size:25px}.callout{left:27%;top:8%;width:66%}.sentence-card{left:27%;width:70%;bottom:5%}.paragraph-card{left:9%;width:75%;bottom:4%}.tr-body{padding:9px}.tr-word{font-size:16px}.meaning{font-size:12px}.example{font-size:9px}.previews{grid-template-columns:repeat(2,minmax(0,1fr))}.thumb{height:85px}.preview strong{font-size:11px}.preview small{font-size:9px}footer{flex-direction:column;align-items:center}footer div{flex-wrap:wrap;justify-content:center}}
+</style>
 </head>
+<body>
+<header class="wrap">
+<a class="brand" href="#"><span class="logo">▱</span>Serbka</a>
+<nav class="nav"><a href="#demo">Возможности</a><a href="#how">Как работает</a><a href="#download">Скачать</a></nav>
+<a class="btn" href="https://github.com/nikishteniki-create/serbka/releases/latest/download/Serbka.dmg"> Скачать для Mac</a>
+</header>
 
-<body class="min-h-screen flex flex-col">
+<main class="wrap">
+<section class="hero">
+<div class="pill">✦ Умный помощник для macOS</div>
+<h1>Понимай сербский <span class="grad">везде, где ты уже работаешь</span></h1>
+<p class="intro">Выдели слово или предложение — и получи перевод. Читай книги, смотри видео, изучай сайты и осваивай разговорный сербский без постоянного переключения между приложениями.</p>
+<div class="features">
+<div class="feature"><span class="fi">ϟ</span><span><b>Мгновенный перевод</b><br>Горячая клавиша</span></div>
+<div class="feature"><span class="fi">▶</span><span><b>Видео и субтитры</b><br>Сериалы и мультфильмы</span></div>
+<div class="feature"><span class="fi">▤</span><span><b>Книги и PDF</b><br>Слова и предложения</span></div>
+<div class="feature"><span class="fi">⇄</span><span><b>Обратный перевод</b><br>С русского на сербский</span></div>
+</div>
+</section>
 
-    <div aria-hidden="true"
-         class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full">
-    </div>
+<section id="demo">
+<div class="showcase">
+<div class="chrome"><i class="dotwin" style="background:#ff6058"></i><i class="dotwin" style="background:#ffbd2e"></i><i class="dotwin" style="background:#28c840"></i><span class="address">Serbka · Перевод прямо на экране</span></div>
 
-    <header class="relative z-10 w-full py-6 px-6 md:px-12 flex justify-between items-center max-w-6xl mx-auto">
-        <a href="#top" class="flex items-center gap-3 text-white font-semibold tracking-tight">
-            <span class="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 shadow-lg shadow-purple-500/20">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6.5c3.5-1.4 6.5-.8 9 1.5v12c-2.5-2.3-5.5-2.9-9-1.5v-12Zm18 0c-3.5-1.4-6.5-.8-9 1.5v12c2.5-2.3 5.5-2.9 9-1.5v-12Z"/>
-                </svg>
-            </span>
-            <span class="text-lg">Serbka</span>
-        </a>
+<!-- СЛАЙД 1: КНИГА -->
+<article class="slide active">
+<div class="stage">
+<div class="demo">
+<div class="scene-tag">▤ КНИГА / PDF</div>
+<div class="bookpage">
+<div class="booklabel">Глава 2 · Novi početak</div>
+<h3>Novi početak</h3>
+<p>Život u Beogradu može biti izazovan, ali upravo to <span class="hl">iskustvo</span> čini ga posebnim. Kada stigneš u novi grad, važno je da ostaneš otvoren za ljude, kulturu i nove prilike.</p>
+<p>Svaki dan donosi nešto novo — nove razgovore, nova mesta i nova prijateljstva.</p>
+<p><span class="hl-sentence">Vremenom ćeš bolje razumeti kako sve funkcioniše i osećaćeš se sigurnije u svakodnevnim situacijama.</span></p>
+<p><span class="hl-para">Beograd je grad kontrasta, ali upravo u tome leži njegova čar.</span></p>
+<div class="page-number">13</div>
+</div>
+<div class="cursor">➤</div>
+<div class="callout">
+<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">▱ SERBKA</span><span>⌘ S</span></div><div class="tr-body"><div class="tr-word">iskustvo　<span style="color:#9caeff">◖))</span></div><div class="pron">[искуство]</div><span class="kind">Существительное · ср. род</span><div class="meaning">Опыт, пережитый опыт</div><div class="example">Ovo je posebno iskustvo.<br><span>Это особенный опыт.</span></div><div class="tr-foot"><span>Сербский → Русский</span><span>☆　▢</span></div></div></div>
+</div>
+<div class="sentence-card">
+<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">SERBKA · ПРЕДЛОЖЕНИЕ</span><span>⌘ S</span></div><div class="tr-body"><div class="meaning">Со временем ты лучше поймёшь, как всё устроено, и будешь увереннее чувствовать себя в повседневных ситуациях.</div><div class="tr-foot"><span>Перевод целого предложения</span><span>◖))</span></div></div></div>
+</div>
+<div class="paragraph-card">
+<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">SERBKA · КОНТЕКСТ</span></div><div class="tr-body"><div class="meaning">Белград — город контрастов, но именно в этом заключается его очарование.</div><div class="tr-foot"><span>Перевод по смыслу</span><span>▢　☆</span></div></div></div>
+</div>
+</div>
+<aside class="info"><div class="kicker">01 / Книги и PDF</div><h2>От одного слова — до целого предложения</h2><p>Читай сербскую книгу или документ и разбирайся в тексте на своём темпе.</p><ul><li><span class="check">✓</span>Перевод отдельного слова</li><li><span class="check">✓</span>Перевод целого предложения</li><li><span class="check">✓</span>Понимание контекста</li><li><span class="check">✓</span>Примеры использования</li></ul><div class="tip">Слово непонятно? Посмотри перевод. Неясна мысль? Переведи всё предложение.</div></aside>
+</div>
+</article>
 
-        <a href="https://github.com/nikishteniki-create/serbka/releases/latest/download/Serbka.dmg"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="action-link inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium text-white glass glass-hover transition-all">
-            Скачать
-        </a>
-    </header>
+<!-- СЛАЙД 2: МУЛЬТФИЛЬМ -->
+<article class="slide">
+<div class="stage">
+<div class="demo" style="background:#6d9dc0">
+<img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1300&q=85" alt="Яркая сцена для примера видео" style="width:100%;height:100%;min-height:450px;object-fit:cover;display:block" onerror="this.style.display='none'">
+<div class="scene-tag">▶ VIDEO · SRPSKI</div>
+<div style="position:absolute;inset:0;background:linear-gradient(0deg,#070811f2,transparent 55%)"></div>
+<div style="position:absolute;top:18%;left:7%;right:7%;text-align:center;color:white;text-shadow:0 2px 12px #000;font-size:clamp(18px,2.8vw,32px);font-weight:800">Hajde, <span style="background:#8b5cf6;padding:2px 6px;border-radius:4px">probaj</span> nešto novo!</div>
+<div style="position:absolute;bottom:70px;left:5%;right:5%;text-align:center;background:#080910dc;color:white;border-radius:8px;padding:12px;font-size:clamp(13px,1.8vw,19px)">Hajde, <span style="background:#8b5cf6;padding:2px 5px;border-radius:4px">probaj</span> nešto novo!</div>
+<div style="position:absolute;bottom:20px;left:4%;right:4%;height:4px;background:#ffffff6a;border-radius:5px"><div style="height:100%;width:36%;background:#ff455f;border-radius:5px"></div></div>
+<div style="position:absolute;left:6%;bottom:33px;font-size:10px;color:white">▶　Ⅱ　◖))　 2:14 / 6:35</div>
+<div class="callout" style="left:auto;right:4%;top:4%;width:54%">
+<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">▱ SERBKA</span><span>⌘ S</span></div><div class="tr-body"><div class="tr-word">probaj　<span style="color:#9caeff">◖))</span></div><div class="pron">[пробай]</div><span class="kind">Глагол · повелительная форма</span><div class="meaning">Попробуй!</div><div class="example">Hajde, probaj nešto novo!<br><span>Давай, попробуй что-нибудь новое!</span></div><div class="tr-foot"><span>Сербский → Русский</span><span>☆　▢</span></div></div></div>
+</div>
+<div style="position:absolute;right:4%;bottom:8%;width:60%;max-width:390px">
+<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">SERBKA · ПОЛНЫЙ ПЕРЕВОД</span></div><div class="tr-body"><div class="meaning">«Давай, попробуй что-нибудь новое!»</div><div class="example">Hajde — давай · probaj — попробуй · nešto novo — что-нибудь новое</div><div class="tr-foot"><span>Перевод субтитров</span><span>◖))</span></div></div></div>
+</div>
+</div>
+<aside class="info"><div class="kicker">02 / Видео и мультфильмы</div><h2>Понимай, что говорят герои</h2><p>Выдели слово в субтитрах, а затем разберись в целой фразе — без копирования текста в браузерный переводчик.</p><ul><li><span class="check">✓</span>Незнакомое слово в субтитрах</li><li><span class="check">✓</span>Перевод реплики целиком</li><li><span class="check">✓</span>Разбор фразы по частям</li></ul><div class="tip">Мультфильмы, видео, интервью и обучающие ролики — учись на том, что тебе интересно.</div></aside>
+</div>
+</article>
 
-    <main id="top" class="relative z-10 flex-grow flex flex-col items-center px-6 text-center max-w-4xl mx-auto w-full">
+<!-- СЛАЙД 3: ОБРАТНЫЙ ПЕРЕВОД -->
+<article class="slide">
+<div class="stage">
+<div class="demo" style="background:linear-gradient(145deg,#33275c,#172b4d 65%,#111522)">
+<div class="scene-tag">⇄ РУССКИЙ → СЕРБСКИЙ</div>
+<div style="position:absolute;inset:0;opacity:.3;background:radial-gradient(ellipse at 25% 25%,#c4b5fd,transparent 35%),radial-gradient(ellipse at 80% 75%,#4f8cff,transparent 40%)"></div>
+<div style="position:absolute;top:12%;left:7%;right:7%;color:#fff">
+<div style="font-size:11px;letter-spacing:2px;color:#d3c8ff">РУССКИЙ · ЖИВАЯ РЕЧЬ</div>
+<div style="font-size:clamp(23px,3.4vw,43px);font-weight:800;letter-spacing:-1.4px;line-height:1.15;margin-top:12px">«Да ладно,<br>не парься!»</div>
+<div style="font-size:12px;color:#d6d4e8;margin-top:10px">Как сказать это по-сербски естественно?</div>
+</div>
+<div style="position:absolute;left:7%;right:7%;top:43%;height:1px;background:#ffffff28"></div>
+<div style="position:absolute;left:7%;right:7%;top:49%;color:#c9bbff;font-size:11px;letter-spacing:2px">SERBKA ПРЕДЛАГАЕТ</div>
+<div style="position:absolute;left:7%;right:7%;top:56%;font-size:clamp(27px,4vw,49px);font-weight:850;letter-spacing:-1.5px;color:white">Ma daj, ne brini!</div>
+<div style="position:absolute;left:7%;right:7%;top:70%;font-size:13px;color:#e0ddf4">«Да брось, не переживай!»</div>
+<div style="position:absolute;left:7%;right:7%;bottom:8%;border:1px solid #ffffff30;border-radius:13px;padding:14px;background:#090b18a8;backdrop-filter:blur(10px)">
+<div style="font-size:10px;color:#c8baff;margin-bottom:8px">ПОЧЕМУ ТАК?</div>
+<div style="font-size:12px;line-height:1.7">Ma daj — разговорное «да брось», «да ладно».<br>Ne brini — «не переживай».</div>
+</div>
+</div>
+<aside class="info"><div class="kicker">03 / Обратный перевод</div><h2>Не просто перевод. Живой язык.</h2><p>Хочешь сказать что-то по-сербски, но в голове только русская фраза? Начни с неё и найди естественный вариант для разговора.</p><ul><li><span class="check">✓</span>Русский → сербский</li><li><span class="check">✓</span>Разговорные выражения</li><li><span class="check">✓</span>Пояснение оттенка смысла</li><li><span class="check">✓</span>Примеры в контексте</li></ul><div class="tip">Пример демонстрационный: подходящий вариант зависит от ситуации, тона и собеседника.</div></aside>
+</div>
+</article>
 
-        <section class="pt-16 md:pt-24 pb-12 flex flex-col items-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-purple-300 mb-6 border border-purple-500/20">
-                <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-                Умный помощник для macOS
-            </div>
+<!-- СЛАЙД 4: САЙТЫ И МАГАЗИНЫ -->
+<article class="slide">
+<div class="stage">
+<div class="demo" style="background:#f3f4f7;color:#171923">
+<div class="scene-tag">▣ ONLINE PRODAVNICA</div>
+<div style="background:white;color:#20212b;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;font-weight:850;font-size:19px">volta <span style="font-size:10px;font-weight:400">Laptop računari　 Telefoni　 TV</span></div>
+<div style="padding:18px 5%;color:#262738">
+<div style="font-size:11px;color:#6b6b7b">Početna / Laptop računari</div>
+<div style="font-size:clamp(20px,2.8vw,34px);font-weight:800;margin:13px 0">Laptop računari</div>
+<div style="background:white;border:1px solid #dddde5;border-radius:12px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center">
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80" alt="Ноутбук" style="width:100%;border-radius:8px" onerror="this.style.display='none'">
+<div><div style="font-size:11px;color:#666">Lenovo IdeaPad</div><div style="font-size:16px;font-weight:750;margin:9px 0">Tehničke karakteristike</div><div style="font-size:11px;line-height:1.7;color:#555">Procesor · Memorija · Garancija</div><div style="font-size:17px;font-weight:800;margin:10px 0">89.990 RSD</div><div style="background:#316df4;color:white;border-radius:7px;padding:9px;text-align:center;font-size:11px">Dodaj u korpu</div></div>
+</div>
+</div>
+<div class="callout" style="left:auto;right:4%;top:17%;width:49%">
+<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">▱ SERBKA</span><span>⌘ S</span></div><div class="tr-body"><div class="tr-word">garancija　<span style="color:#9caeff">◖))</span></div><div class="pron">[гаранция]</div><span class="kind">Существительное · ж. род</span><div class="meaning">Гарантия</div><div class="example">Proverite uslove garancije.<br><span>Проверьте условия гарантии.</span></div><div class="tr-foot"><span>Сербский → Русский</span><span>☆　▢</span></div></div></div>
+</div>
+</div>
+<aside class="info"><div class="kicker">04 / Сайты и магазины</div><h2>Понимай, что покупаешь</h2><p>Характеристики, доставка, гарантия, условия возврата. Сербские сайты становятся понятнее без постоянного копирования текста.</p><ul><li><span class="check">✓</span>Названия характеристик</li><li><span class="check">✓</span>Условия покупки</li><li><span class="check">✓</span>Перевод отдельных слов</li></ul><div class="tip">Tehničke karakteristike — технические характеристики. Garancija — гарантия.</div></aside>
+</div>
+</article>
 
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-                Умный помощник для перевода и изучения
-                <span class="animated-gradient-text">сербского языка</span>
-            </h1>
+<div class="controls"><div class="dots"><button class="dotbtn active" aria-label="Книги"></button><button class="dotbtn" aria-label="Видео"></button><button class="dotbtn" aria-label="Обратный перевод"></button><button class="dotbtn" aria-label="Магазины"></button></div><div><button class="arrow" id="prev">← Назад</button> <button class="arrow" id="next">Следующий →</button></div></div>
+</div>
 
-            <h2 class="serbka-tagline text-2xl md:text-3xl font-semibold tracking-tight mb-4 leading-snug">
-                Понимай сербский, не отвлекаясь от работы
-            </h2>
+<div class="previews">
+<button class="preview active" data-pick="0"><div class="thumb" style="background:#e9ddc4"><div style="padding:12px;font:13px Georgia;color:#31291e">Novi početak<br><br><span style="background:#8baeff">iskustvo</span><br><br>Život u Beogradu...</div></div><strong>▤ Книги и PDF</strong><small>Слово, предложение и контекст</small></button>
+<button class="preview" data-pick="1"><div class="thumb"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&q=75" alt=""></div><strong>▶ Видео и субтитры</strong><small>Перевод реплик и слов</small></button>
+<button class="preview" data-pick="2"><div class="thumb" style="background:linear-gradient(145deg,#5544a1,#14162b);padding:15px;color:white;font-size:12px"><b>РУС → SRB</b><p>Да ладно, не парься!</p><b style="color:#d0bfff">Ma daj, ne brini!</b></div><strong>⇄ Обратный перевод</strong><small>Разговорный сербский</small></button>
+<button class="preview" data-pick="3"><div class="thumb"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=75" alt=""></div><strong>▣ Сайты и магазины</strong><small>Покупки без языкового барьера</small></button>
+</div>
+</section>
 
-            <p class="text-base md:text-lg text-zinc-400 max-w-2xl mb-10 font-normal leading-relaxed">
-                Переводи незнакомые слова за секунду прямо в приложении, которым пользуешься.
-                Serbka работает незаметно в фоне: одно сочетание клавиш — и перевод перед тобой.
-                Без браузера, лишних окон и переключения между программами.
-            </p>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-                <a href="https://github.com/nikishteniki-create/serbka/releases/latest/download/Serbka.dmg"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="action-link w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-white/10">
-                    <svg class="w-5 h-5" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
-                        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.1-1.9-14.24-6.08-3.92-3.24-7.85-7.98-11.79-14.23-6.1-9.84-10.89-20.64-14.37-32.4-3.48-11.75-5.22-23.2-5.22-34.34 0-14.19 3.68-25.7 11.05-34.52 7.36-8.83 16.73-13.31 28.1-13.43 4.47 0 9.4 1.15 14.78 3.45 5.39 2.3 9.07 3.45 11.05 3.45 2.06 0 5.92-1.22 11.58-3.66 5.66-2.43 10.66-3.61 15.01-3.53 14.12.55 25.13 5.48 33.02 14.78-12.08 7.36-18.01 17.5-17.79 30.41.22 10.45 4.17 19.12 11.84 26.02 7.67 6.9 16.92 10.42 27.75 10.56-2.62 7.84-6.14 16.03-10.57 24.58zM119.22 31.97c0-7.42 2.65-14.31 7.95-20.68 5.3-6.37 12.01-10.15 20.13-11.34.13 1.09.2 2.11.2 3.06 0 7.3-2.73 14.28-8.19 20.94-5.46 6.66-12.28 10.57-20.46 11.73-.11-.98-.16-1.95-.16-2.91z"/>
-                    </svg>
-                    <span>Скачать для macOS</span>
-                </a>
-            </div>
-
-            <p class="text-xs text-zinc-500 mt-4">
-                Требуется macOS 13.0 или новее
-            </p>
-        </section>
-
-        <section class="mt-8 mb-20 w-full max-w-3xl glass p-6 rounded-3xl glow border border-white/10 relative overflow-hidden text-left">
-            <div class="flex items-center justify-between mb-4 border-b border-white/5 pb-4">
-                <div class="flex items-center space-x-2" aria-hidden="true">
-                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <span id="slide-indicator" class="text-xs text-purple-400 font-mono">1 / 4</span>
-                    <span class="text-xs text-zinc-400 font-mono">Serbka Popover</span>
-                </div>
-            </div>
-
-            <div id="carousel-slides" class="relative min-h-[140px]">
-                <div class="slide space-y-4">
-                    <div class="flex justify-between items-center bg-zinc-900/50 p-4 rounded-xl border border-white/5">
-                        <span class="text-sm text-zinc-300">Перевод с сербского</span>
-                        <span class="text-xs text-purple-400 font-medium">Сербский ➔ Русский</span>
-                    </div>
-                    <div class="bg-zinc-900/80 p-4 rounded-xl border border-purple-500/20 text-white font-medium">
-                        Dobro došli u Srbiju ➔ Добро пожаловать в Сербию
-                    </div>
-                    <div class="flex items-center justify-between text-xs text-zinc-400 pt-2">
-                        <span>Мгновенный поиск под курсором</span>
-                        <span>Cmd + S</span>
-                    </div>
-                </div>
-
-                <div class="slide hidden space-y-4">
-                    <div class="flex justify-between items-center bg-zinc-900/50 p-4 rounded-xl border border-white/5">
-                        <span class="text-sm text-zinc-300">Перевод с русского</span>
-                        <span class="text-xs text-indigo-400 font-medium">Русский ➔ Сербский</span>
-                    </div>
-                    <div class="bg-zinc-900/80 p-4 rounded-xl border border-indigo-500/20 text-white font-medium">
-                        Как дела? ➔ Како си? / Kako si?
-                    </div>
-                    <div class="flex items-center justify-between text-xs text-zinc-400 pt-2">
-                        <span>Двусторонний перевод</span>
-                        <span>Cmd + Shift + S</span>
-                    </div>
-                </div>
-
-                <div class="slide hidden space-y-4">
-                    <div class="flex justify-between items-center bg-zinc-900/50 p-4 rounded-xl border border-white/5">
-                        <span class="text-sm text-zinc-300">Аудиопроизношение</span>
-                        <span class="text-xs text-purple-400 font-medium">Озвучивание</span>
-                    </div>
-                    <div class="bg-zinc-900/80 p-4 rounded-xl border border-purple-500/20 text-white font-medium flex items-center justify-between gap-3">
-                        <span>Kako se kaže? — Как сказать?</span>
-                        <span class="text-purple-300 text-sm">♫</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs text-zinc-400 pt-2">
-                        <span>Слушай произношение</span>
-                        <span>Cmd + P</span>
-                    </div>
-                </div>
-
-                <div class="slide hidden space-y-4">
-                    <div class="flex justify-between items-center bg-zinc-900/50 p-4 rounded-xl border border-white/5">
-                        <span class="text-sm text-zinc-300">Ваш личный словарь</span>
-                        <span class="text-xs text-emerald-400 font-medium">Избранное</span>
-                    </div>
-                    <div class="bg-zinc-900/80 p-4 rounded-xl border border-emerald-500/20 text-white font-medium flex items-center justify-between gap-3">
-                        <span>Porodica — Семья</span>
-                        <span class="text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">Сохранено ✓</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs text-zinc-400 pt-2">
-                        <span>Сохраняй полезные слова</span>
-                        <span>Cmd + D</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-center mt-6 pt-4 border-t border-white/5">
-                <button id="prev-btn" type="button" class="px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-300 transition-all">
-                    ← Назад
-                </button>
-
-                <div class="flex gap-2 items-center" id="carousel-dots">
-                    <button type="button" class="w-2 h-2 rounded-full bg-purple-500 transition-all" data-index="0" aria-label="Слайд 1"></button>
-                    <button type="button" class="w-2 h-2 rounded-full bg-zinc-700 transition-all" data-index="1" aria-label="Слайд 2"></button>
-                    <button type="button" class="w-2 h-2 rounded-full bg-zinc-700 transition-all" data-index="2" aria-label="Слайд 3"></button>
-                    <button type="button" class="w-2 h-2 rounded-full bg-zinc-700 transition-all" data-index="3" aria-label="Слайд 4"></button>
-                </div>
-
-                <button id="next-btn" type="button" class="px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-300 transition-all">
-                    Вперед →
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <footer class="relative z-10 w-full py-8 px-6 text-center text-xs text-zinc-500 max-w-6xl mx-auto border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span>© 2026 serbka.com. All rights reserved.</span>
-
-        <div class="flex space-x-6">
-            <a href="https://t.me/Nikidontspiri"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="action-link hover:text-zinc-300 transition-colors">
-                Support
-            </a>
-
-            <a href="mailto:Nikidontspiri@gmail.com"
-               class="action-link hover:text-zinc-300 transition-colors">
-                Contact
-            </a>
-        </div>
-    </footer>
-
-    <script>
-        (() => {
-            const slides = document.querySelectorAll('.slide');
-            const dots = document.querySelectorAll('#carousel-dots button');
-            const indicator = document.getElementById('slide-indicator');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-
-            if (!slides.length || !dots.length || !indicator || !prevBtn || !nextBtn) {
-                return;
-            }
-
-            let currentIndex = 0;
-            let slideInterval;
-
-            function showSlide(index) {
-                currentIndex = (index + slides.length) % slides.length;
-
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('hidden', i !== currentIndex);
-                });
-
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('bg-purple-500', i === currentIndex);
-                    dot.classList.toggle('bg-zinc-700', i !== currentIndex);
-                    dot.classList.toggle('w-4', i === currentIndex);
-                    dot.classList.toggle('w-2', i !== currentIndex);
-                });
-
-                indicator.textContent = `${currentIndex + 1} / ${slides.length}`;
-            }
-
-            function nextSlide() {
-                showSlide(currentIndex + 1);
-            }
-
-            function prevSlide() {
-                showSlide(currentIndex - 1);
-            }
-
-            function startTimer() {
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, 5000);
-            }
-
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                startTimer();
-            });
-
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                startTimer();
-            });
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    showSlide(index);
-                    startTimer();
-                });
-            });
-
-            showSlide(0);
-            startTimer();
-        })();
-    </script>
+<section class="section" id="how"><div class="kicker">Меньше переключений · больше понимания</div><h2>Сербский в твоей повседневной жизни</h2><p>Учись на том, что смотришь, читаешь и используешь каждый день. Не только запоминай перевод, но и понимай, как слово работает в контексте.</p></section>
+<div class="cards">
+<div class="card"><div class="fi">ϟ</div><h3>Быстрый вызов</h3><p>Открой перевод горячей клавишей и возвращайся к своей задаче без лишних окон.</p></div>
+<div class="card"><div class="fi">▤</div><h3>Текст на экране</h3><p>Распознавание текста помогает там, где слово нельзя просто скопировать.</p></div>
+<div class="card"><div class="fi">⇄</div><h3>В обе стороны</h3><p>Разбирай сербские слова по-русски и подбирай сербские выражения для своих мыслей.</p></div>
+</div>
+<section class="cta" id="download"><h2>Пусть сербский станет понятнее.</h2><p>Один маленький помощник. Меньше переключений. Больше понимания каждый день.</p><a class="btn" href="https://github.com/nikishteniki-create/serbka/releases/latest/download/Serbka.dmg"> Скачать Serbka для macOS ↗</a></section>
+</main>
+<footer class="wrap"><span>© 2026 Serbka</span><div><a href="https://t.me/Nikidontspiri" target="_blank" rel="noopener noreferrer">Support в Telegram</a><a href="mailto:Nikidontspiri@gmail.com">Контакты</a></div></footer>
+<script>
+(()=> {
+const slides=[...document.querySelectorAll('.slide')];
+const dots=[...document.querySelectorAll('.dotbtn')];
+const previews=[...document.querySelectorAll('.preview')];
+let current=0,timer;
+function show(i){
+ current=(i+slides.length)%slides.length;
+ slides.forEach((s,n)=>s.classList.toggle('active',n===current));
+ dots.forEach((d,n)=>d.classList.toggle('active',n===current));
+ previews.forEach((p,n)=>p.classList.toggle('active',n===current));
+}
+function restart(){clearInterval(timer);timer=setInterval(()=>show(current+1),9000)}
+dots.forEach((b,i)=>b.addEventListener('click',()=>{show(i);restart()}));
+previews.forEach((b,i)=>b.addEventListener('click',()=>{show(i);restart()}));
+document.getElementById('prev').addEventListener('click',()=>{show(current-1);restart()});
+document.getElementById('next').addEventListener('click',()=>{show(current+1);restart()});
+show(0);restart();
+})();
+</script>
 </body>
 </html>
