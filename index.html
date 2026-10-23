@@ -1,263 +1,1527 @@
-
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080910">
-<title>Serbka — Сербский без языкового барьера</title>
-<style>
-:root{--bg:#080910;--panel:#121521;--purple:#a78bfa;--muted:#a7a7bb;--line:#ffffff1c}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% 0,#292044,transparent 52%),var(--bg);color:#f8f7ff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
-a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer}
-.wrap{width:min(1240px,calc(100% - 32px));margin:auto}
-header{height:78px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800}
-.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#d8ccff,#7042e8);font-size:23px}
-.nav{display:flex;gap:25px;font-size:13px;color:#c9c6d9}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:12px;background:#f7f5ff;color:#161321;font-size:13px;font-weight:750;transition:.2s}
-.btn:hover{transform:translateY(-2px);background:#dcd2ff}
-.hero{text-align:center;padding:60px 0 34px}
-.pill{display:inline-block;border:1px solid #b8a4ff40;background:#a78bfa13;color:#d8ccff;padding:9px 14px;border-radius:30px;font-size:12px}
-h1{font-size:clamp(40px,6.5vw,76px);line-height:1.03;letter-spacing:-.065em;max-width:1000px;margin:23px auto 18px}
-.grad{background:linear-gradient(100deg,#fff,#c4b5fd 50%,#9c8aff);color:transparent;background-clip:text;-webkit-background-clip:text}
-.intro{max-width:700px;margin:auto;color:var(--muted);font-size:15px;line-height:1.8}
-.features{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;margin:29px 0}
-.feature{display:flex;align-items:center;gap:9px;font-size:12px;text-align:left}
-.fi{width:36px;height:36px;border-radius:11px;background:#a78bfa15;border:1px solid #a78bfa36;display:grid;place-items:center;font-size:17px}
-.showcase{padding:12px;border:1px solid #b8a4ff50;border-radius:22px;background:#ffffff06;box-shadow:0 20px 80px #0008,0 0 55px #8b5cf61b}
-.chrome{height:38px;display:flex;align-items:center;gap:7px;padding:0 12px;background:#20212c;border-radius:12px 12px 0 0}
-.dotwin{width:10px;height:10px;border-radius:50%}
-.address{margin:auto;border:1px solid #ffffff10;background:#101119;border-radius:7px;padding:5px 42px;color:#89889e;font-size:10px}
-.slide{display:none;animation:appear .35s ease}
-.slide.active{display:block}
-@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.stage{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(240px,.75fr);min-height:450px;overflow:hidden;background:#12131d}
-.demo{position:relative;min-width:0;overflow:hidden;background:#282538;color:#17151a}
-.bookpage{position:absolute;inset:0;background:linear-gradient(90deg,#17151b,#17151b 5%,#e3d5b8 6%,#f3e8d1 17%,#f6ecd8 90%,#b3a181);padding:34px 6% 25px 13%;font-family:Georgia,"Times New Roman",serif;color:#262017;overflow:hidden}
-.bookpage:before{content:"";position:absolute;left:9%;top:0;bottom:0;width:2px;background:#bca989;box-shadow:4px 0 14px #55432b30}
-.booklabel{font:10px Arial,sans-serif;letter-spacing:2px;color:#89795d;text-transform:uppercase}
-.bookpage h3{font-size:clamp(25px,3vw,38px);margin:12px 0 18px;line-height:1.1}
-.bookpage p{font-size:clamp(12px,1.35vw,17px);line-height:1.8;margin:0 0 14px}
-.hl{background:#83aaff;color:#142c57;border-radius:2px;padding:1px 3px}
-.hl-sentence{background:#c7b6fa;padding:2px 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-.hl-para{background:#d3c5ff;padding:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-.cursor{position:absolute;z-index:4;font:25px Arial,sans-serif;color:#15131b;text-shadow:0 1px white;left:31%;top:39%;transform:rotate(-15deg)}
-.callout{position:absolute;z-index:3;left:30%;top:8%;width:48%;max-width:350px}
-.translation{color:#f6f5ff;background:linear-gradient(145deg,#252936f7,#11131cf7);border:1px solid #ffffff55;border-radius:13px;box-shadow:0 14px 36px #0008;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;backdrop-filter:blur(18px)}
-.tr-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid #ffffff17;color:#b6b5c9;font-size:10px}
-.tr-brand{font-weight:800;letter-spacing:1px;color:#eeeaff}
-.tr-body{padding:12px}
-.tr-word{font-size:clamp(16px,1.8vw,23px);font-weight:750;letter-spacing:-.5px}
-.pron{font-size:10px;color:#aaa9bd;margin-top:3px}
-.kind{display:inline-block;margin-top:7px;padding:4px 6px;border-radius:5px;background:#ffffff12;color:#c5c2d7;font-size:9px}
-.meaning{font-size:14px;line-height:1.5;margin-top:8px}
-.example{margin-top:8px;padding:8px;border:1px solid #ffffff14;border-radius:8px;background:#ffffff06;font-size:10px;line-height:1.55;color:#d4d3e3}
-.example span{color:#aaa9bd}
-.tr-foot{display:flex;justify-content:space-between;border-top:1px solid #ffffff14;margin-top:9px;padding-top:8px;color:#a6a4ba;font-size:9px}
-.sentence-card{position:absolute;z-index:3;left:34%;bottom:5%;width:61%;max-width:410px}
-.paragraph-card{position:absolute;z-index:3;left:14%;bottom:4%;width:63%;max-width:390px}
-.bookpage .page-number{position:absolute;bottom:13px;right:20px;font:11px Arial,sans-serif;color:#8e8066}
-.scene-tag{position:absolute;z-index:5;top:13px;left:13px;background:#11131cdb;border:1px solid #ffffff35;border-radius:8px;padding:7px 9px;color:#f7f4ff;font:10px Arial,sans-serif}
-.info{padding:29px 22px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(155deg,#191b2a,#101119)}
-.kicker{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#c4b5fd;font-weight:800}
-.info h2{font-size:clamp(23px,2.3vw,30px);letter-spacing:-1px;line-height:1.13;margin:14px 0}
-.info p{font-size:12px;line-height:1.8;color:#b2b0c5;margin:0}
-.info ul{list-style:none;margin:19px 0 0;padding:0;display:grid;gap:11px}
-.info li{font-size:11px;color:#d9d7e8;line-height:1.5}
-.check{color:#c4b5fd;margin-right:7px}
-.tip{margin-top:18px;padding:11px;border-radius:10px;border:1px solid #a78bfa30;background:#a78bfa0d;color:#d7caff;font-size:10px;line-height:1.6}
-.controls{display:flex;justify-content:space-between;align-items:center;padding:13px 3px 2px}
-.dots{display:flex;gap:7px}
-.dotbtn{width:7px;height:7px;padding:0;border:0;border-radius:10px;background:#5b596b}
-.dotbtn.active{width:24px;background:#c4b5fd}
-.arrow{border:1px solid #ffffff24;border-radius:9px;background:#ffffff08;color:white;padding:9px 12px;font-size:11px}
-.previews{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:14px}
-.preview{padding:8px;text-align:left;border:1px solid #ffffff20;border-radius:13px;background:#ffffff05;color:white;min-width:0}
-.preview.active{border-color:#a78bfa;box-shadow:0 0 20px #8b5cf638;background:#a78bfa12}
-.thumb{height:85px;border-radius:8px;overflow:hidden;position:relative;background:#262538}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.preview strong{display:block;font-size:11px;margin:9px 2px 5px}
-.preview small{display:block;color:#aaa8bd;font-size:10px;line-height:1.5;margin:0 2px 3px}
-.section{text-align:center;padding:90px 0 25px}
-.section h2{font-size:clamp(30px,4vw,45px);letter-spacing:-1.5px;margin:12px 0}
-.section p{color:var(--muted);font-size:14px;line-height:1.8;max-width:650px;margin:auto}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 75px}
-.card{padding:23px;border:1px solid var(--line);border-radius:15px;background:#ffffff05}
-.card .fi{margin-bottom:15px}
-.card h3{font-size:15px;margin:0 0 9px}
-.card p{font-size:12px;line-height:1.8;color:var(--muted)}
-.cta{padding:48px 20px;text-align:center;border:1px solid #a78bfa35;border-radius:20px;background:radial-gradient(ellipse at 50% 0,#8b5cf62c,transparent 70%),#ffffff04;margin-bottom:70px}
-.cta h2{font-size:clamp(30px,4vw,46px);letter-spacing:-1.5px;margin:0 0 12px}
-.cta p{font-size:13px;color:var(--muted);line-height:1.7;margin:0 auto 24px}
-footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid var(--line);padding:24px 0 30px;color:#858399;font-size:11px}
-footer div{display:flex;gap:20px}
-@media(max-width:800px){.nav{display:none}.hero{padding-top:43px}.stage{grid-template-columns:1fr}.demo{min-height:490px}.info{padding:22px}.info h2{font-size:25px}.cards{grid-template-columns:1fr}.section{padding-top:65px}}
-@media(max-width:520px){.wrap{width:calc(100% - 20px)}header{height:66px}.brand{font-size:19px}.logo{width:34px;height:34px}header .btn{font-size:10px;padding:10px}.hero{padding-top:40px}.intro{font-size:13px}.features{justify-content:flex-start;gap:12px}.feature{font-size:10px}.fi{width:31px;height:31px}.showcase{padding:6px;border-radius:15px}.demo{min-height:440px}.bookpage{padding:30px 4% 25px 10%}.bookpage p{font-size:12px;line-height:1.75}.bookpage h3{font-size:25px}.callout{left:27%;top:8%;width:66%}.sentence-card{left:27%;width:70%;bottom:5%}.paragraph-card{left:9%;width:75%;bottom:4%}.tr-body{padding:9px}.tr-word{font-size:16px}.meaning{font-size:12px}.example{font-size:9px}.previews{grid-template-columns:repeat(2,minmax(0,1fr))}.thumb{height:85px}.preview strong{font-size:11px}.preview small{font-size:9px}footer{flex-direction:column;align-items:center}footer div{flex-wrap:wrap;justify-content:center}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serbka — Погружение в сербский язык · Приложение, Тренажер 130 глаголов и Справочник</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              bg: '#0B0F17',
+              card: '#121826',
+              border: '#1E293B',
+              accent: '#38BDF8',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              rose: '#F43F5E',
+              amber: '#F59E0B'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0B0F17;
+      color: #F8FAFC;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+    .glass-nav {
+      background: rgba(11, 15, 23, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .mac-card {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.55) 0%, rgba(15, 23, 42, 0.85) 100%);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+    .glow-blue {
+      box-shadow: 0 0 40px -10px rgba(56, 189, 248, 0.35);
+    }
+    .class-badge-A {
+      background: rgba(56, 189, 248, 0.14);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .class-badge-I {
+      background: rgba(244, 63, 94, 0.14);
+      color: #FB7185;
+      border: 1px solid rgba(244, 63, 94, 0.35);
+    }
+    .class-badge-E {
+      background: rgba(16, 185, 129, 0.14);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .stem-underline {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+    .stem-A { text-decoration-color: #38BDF8; color: #BAE6FD; }
+    .stem-I { text-decoration-color: #FB7185; color: #FECDD3; }
+    .stem-E { text-decoration-color: #34D399; color: #A7F3D0; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0B0F17; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+  </style>
 </head>
-<body>
-<header class="wrap">
-<a class="brand" href="#"><span class="logo">▱</span>Serbka</a>
-<nav class="nav"><a href="#demo">Возможности</a><a href="#how">Как работает</a><a href="#download">Скачать</a></nav>
-<a class="btn" href="https://github.com/nikishteniki-create/serbka/releases/latest/download/Serbka.dmg"> Скачать для Mac</a>
-</header>
+<body class="min-h-screen flex flex-col selection:bg-sky-500/30 selection:text-sky-200">
 
-<main class="wrap">
-<section class="hero">
-<div class="pill">✦ Умный помощник для macOS</div>
-<h1>Понимай сербский <span class="grad">везде, где ты уже работаешь</span></h1>
-<p class="intro">Выдели слово или предложение — и получи перевод. Читай книги, смотри видео, изучай сайты и осваивай разговорный сербский без постоянного переключения между приложениями.</p>
-<div class="features">
-<div class="feature"><span class="fi">ϟ</span><span><b>Мгновенный перевод</b><br>Горячая клавиша</span></div>
-<div class="feature"><span class="fi">▶</span><span><b>Видео и субтитры</b><br>Сериалы и мультфильмы</span></div>
-<div class="feature"><span class="fi">▤</span><span><b>Книги и PDF</b><br>Слова и предложения</span></div>
-<div class="feature"><span class="fi">⇄</span><span><b>Обратный перевод</b><br>С русского на сербский</span></div>
-</div>
-</section>
+  <!-- TOP NAVIGATION -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <button id="navBrandBtn" type="button" class="flex items-center gap-2.5 text-left group focus:outline-none">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center text-slate-950 font-extrabold text-lg shadow-md shadow-sky-500/20 group-hover:scale-105 transition">▱</span>
+        <div>
+          <span class="font-bold text-lg tracking-tight text-white">Serbka</span>
+          <span class="hidden sm:inline-block ml-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Погружение в сербский</span>
+        </div>
+      </button>
 
-<section id="demo">
-<div class="showcase">
-<div class="chrome"><i class="dotwin" style="background:#ff6058"></i><i class="dotwin" style="background:#ffbd2e"></i><i class="dotwin" style="background:#28c840"></i><span class="address">Serbka · Перевод прямо на экране</span></div>
+      <nav class="flex items-center gap-1 sm:gap-2 bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+        <button id="tabHomeBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white">
+          О платформе
+        </button>
+        <button id="tabLearnBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition bg-sky-500 text-slate-950 font-semibold shadow-sm flex items-center gap-1.5">
+          <span>✦ Обучение</span>
+          <span class="hidden md:inline text-[10px] px-1.5 py-0.2 bg-slate-950/20 rounded-md font-mono">130 глаголов</span>
+        </button>
+        <button id="tabAppBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white">
+          macOS Помощник
+        </button>
+        <button id="tabRoadmapBtn" type="button" class="hidden sm:inline-flex px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white">
+          Скоро
+        </button>
+      </nav>
 
-<!-- СЛАЙД 1: КНИГА -->
-<article class="slide active">
-<div class="stage">
-<div class="demo">
-<div class="scene-tag">▤ КНИГА / PDF</div>
-<div class="bookpage">
-<div class="booklabel">Глава 2 · Novi početak</div>
-<h3>Novi početak</h3>
-<p>Život u Beogradu može biti izazovan, ali upravo to <span class="hl">iskustvo</span> čini ga posebnim. Kada stigneš u novi grad, važno je da ostaneš otvoren za ljude, kulturu i nove prilike.</p>
-<p>Svaki dan donosi nešto novo — nove razgovore, nova mesta i nova prijateljstva.</p>
-<p><span class="hl-sentence">Vremenom ćeš bolje razumeti kako sve funkcioniše i osećaćeš se sigurnije u svakodnevnim situacijama.</span></p>
-<p><span class="hl-para">Beograd je grad kontrasta, ali upravo u tome leži njegova čar.</span></p>
-<div class="page-number">13</div>
-</div>
-<div class="cursor">➤</div>
-<div class="callout">
-<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">▱ SERBKA</span><span>⌘ S</span></div><div class="tr-body"><div class="tr-word">iskustvo　<span style="color:#9caeff">◖))</span></div><div class="pron">[искуство]</div><span class="kind">Существительное · ср. род</span><div class="meaning">Опыт, пережитый опыт</div><div class="example">Ovo je posebno iskustvo.<br><span>Это особенный опыт.</span></div><div class="tr-foot"><span>Сербский → Русский</span><span>☆　▢</span></div></div></div>
-</div>
-<div class="sentence-card">
-<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">SERBKA · ПРЕДЛОЖЕНИЕ</span><span>⌘ S</span></div><div class="tr-body"><div class="meaning">Со временем ты лучше поймёшь, как всё устроено, и будешь увереннее чувствовать себя в повседневных ситуациях.</div><div class="tr-foot"><span>Перевод целого предложения</span><span>◖))</span></div></div></div>
-</div>
-<div class="paragraph-card">
-<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">SERBKA · КОНТЕКСТ</span></div><div class="tr-body"><div class="meaning">Белград — город контрастов, но именно в этом заключается его очарование.</div><div class="tr-foot"><span>Перевод по смыслу</span><span>▢　☆</span></div></div></div>
-</div>
-</div>
-<aside class="info"><div class="kicker">01 / Книги и PDF</div><h2>От одного слова — до целого предложения</h2><p>Читай сербскую книгу или документ и разбирайся в тексте на своём темпе.</p><ul><li><span class="check">✓</span>Перевод отдельного слова</li><li><span class="check">✓</span>Перевод целого предложения</li><li><span class="check">✓</span>Понимание контекста</li><li><span class="check">✓</span>Примеры использования</li></ul><div class="tip">Слово непонятно? Посмотри перевод. Неясна мысль? Переведи всё предложение.</div></aside>
-</div>
-</article>
+      <div class="flex items-center gap-2">
+        <button id="headerDownloadBtn" type="button" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-medium text-white transition flex items-center gap-1.5">
+          <span></span>
+          <span class="hidden sm:inline">Serbka для Mac</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<!-- СЛАЙД 2: МУЛЬТФИЛЬМ -->
-<article class="slide">
-<div class="stage">
-<div class="demo" style="background:#6d9dc0">
-<img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1300&q=85" alt="Яркая сцена для примера видео" style="width:100%;height:100%;min-height:450px;object-fit:cover;display:block" onerror="this.style.display='none'">
-<div class="scene-tag">▶ VIDEO · SRPSKI</div>
-<div style="position:absolute;inset:0;background:linear-gradient(0deg,#070811f2,transparent 55%)"></div>
-<div style="position:absolute;top:18%;left:7%;right:7%;text-align:center;color:white;text-shadow:0 2px 12px #000;font-size:clamp(18px,2.8vw,32px);font-weight:800">Hajde, <span style="background:#8b5cf6;padding:2px 6px;border-radius:4px">probaj</span> nešto novo!</div>
-<div style="position:absolute;bottom:70px;left:5%;right:5%;text-align:center;background:#080910dc;color:white;border-radius:8px;padding:12px;font-size:clamp(13px,1.8vw,19px)">Hajde, <span style="background:#8b5cf6;padding:2px 5px;border-radius:4px">probaj</span> nešto novo!</div>
-<div style="position:absolute;bottom:20px;left:4%;right:4%;height:4px;background:#ffffff6a;border-radius:5px"><div style="height:100%;width:36%;background:#ff455f;border-radius:5px"></div></div>
-<div style="position:absolute;left:6%;bottom:33px;font-size:10px;color:white">▶　Ⅱ　◖))　 2:14 / 6:35</div>
-<div class="callout" style="left:auto;right:4%;top:4%;width:54%">
-<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">▱ SERBKA</span><span>⌘ S</span></div><div class="tr-body"><div class="tr-word">probaj　<span style="color:#9caeff">◖))</span></div><div class="pron">[пробай]</div><span class="kind">Глагол · повелительная форма</span><div class="meaning">Попробуй!</div><div class="example">Hajde, probaj nešto novo!<br><span>Давай, попробуй что-нибудь новое!</span></div><div class="tr-foot"><span>Сербский → Русский</span><span>☆　▢</span></div></div></div>
-</div>
-<div style="position:absolute;right:4%;bottom:8%;width:60%;max-width:390px">
-<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">SERBKA · ПОЛНЫЙ ПЕРЕВОД</span></div><div class="tr-body"><div class="meaning">«Давай, попробуй что-нибудь новое!»</div><div class="example">Hajde — давай · probaj — попробуй · nešto novo — что-нибудь новое</div><div class="tr-foot"><span>Перевод субтитров</span><span>◖))</span></div></div></div>
-</div>
-</div>
-<aside class="info"><div class="kicker">02 / Видео и мультфильмы</div><h2>Понимай, что говорят герои</h2><p>Выдели слово в субтитрах, а затем разберись в целой фразе — без копирования текста в браузерный переводчик.</p><ul><li><span class="check">✓</span>Незнакомое слово в субтитрах</li><li><span class="check">✓</span>Перевод реплики целиком</li><li><span class="check">✓</span>Разбор фразы по частям</li></ul><div class="tip">Мультфильмы, видео, интервью и обучающие ролики — учись на том, что тебе интересно.</div></aside>
-</div>
-</article>
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-1">
 
-<!-- СЛАЙД 3: ОБРАТНЫЙ ПЕРЕВОД -->
-<article class="slide">
-<div class="stage">
-<div class="demo" style="background:linear-gradient(145deg,#33275c,#172b4d 65%,#111522)">
-<div class="scene-tag">⇄ РУССКИЙ → СЕРБСКИЙ</div>
-<div style="position:absolute;inset:0;opacity:.3;background:radial-gradient(ellipse at 25% 25%,#c4b5fd,transparent 35%),radial-gradient(ellipse at 80% 75%,#4f8cff,transparent 40%)"></div>
-<div style="position:absolute;top:12%;left:7%;right:7%;color:#fff">
-<div style="font-size:11px;letter-spacing:2px;color:#d3c8ff">РУССКИЙ · ЖИВАЯ РЕЧЬ</div>
-<div style="font-size:clamp(23px,3.4vw,43px);font-weight:800;letter-spacing:-1.4px;line-height:1.15;margin-top:12px">«Да ладно,<br>не парься!»</div>
-<div style="font-size:12px;color:#d6d4e8;margin-top:10px">Как сказать это по-сербски естественно?</div>
-</div>
-<div style="position:absolute;left:7%;right:7%;top:43%;height:1px;background:#ffffff28"></div>
-<div style="position:absolute;left:7%;right:7%;top:49%;color:#c9bbff;font-size:11px;letter-spacing:2px">SERBKA ПРЕДЛАГАЕТ</div>
-<div style="position:absolute;left:7%;right:7%;top:56%;font-size:clamp(27px,4vw,49px);font-weight:850;letter-spacing:-1.5px;color:white">Ma daj, ne brini!</div>
-<div style="position:absolute;left:7%;right:7%;top:70%;font-size:13px;color:#e0ddf4">«Да брось, не переживай!»</div>
-<div style="position:absolute;left:7%;right:7%;bottom:8%;border:1px solid #ffffff30;border-radius:13px;padding:14px;background:#090b18a8;backdrop-filter:blur(10px)">
-<div style="font-size:10px;color:#c8baff;margin-bottom:8px">ПОЧЕМУ ТАК?</div>
-<div style="font-size:12px;line-height:1.7">Ma daj — разговорное «да брось», «да ладно».<br>Ne brini — «не переживай».</div>
-</div>
-</div>
-<aside class="info"><div class="kicker">03 / Обратный перевод</div><h2>Не просто перевод. Живой язык.</h2><p>Хочешь сказать что-то по-сербски, но в голове только русская фраза? Начни с неё и найди естественный вариант для разговора.</p><ul><li><span class="check">✓</span>Русский → сербский</li><li><span class="check">✓</span>Разговорные выражения</li><li><span class="check">✓</span>Пояснение оттенка смысла</li><li><span class="check">✓</span>Примеры в контексте</li></ul><div class="tip">Пример демонстрационный: подходящий вариант зависит от ситуации, тона и собеседника.</div></aside>
-</div>
-</article>
+    <!-- ==================== VIEW 1: HOME (ECOSYSTEM + IMMERSION) ==================== -->
+    <section id="viewHome" class="hidden">
+      <!-- Hero Section -->
+      <div class="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24 border-b border-slate-800/80">
+        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-500/15 via-indigo-950/10 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div class="max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs sm:text-sm font-medium mb-6">
+              <span>✦ Больше чем переводчик</span>
+              <span class="text-slate-600">·</span>
+              <span>Экосистема погружения в живой сербский язык</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Погружайся в сербский язык <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400">естественно и без барьеров</span>
+            </h1>
+            <p class="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+              Мы строим пространство для тех, кто живёт, работает или переезжает в Сербию. Тренируй спряжения глаголов и грамматику в интерактивных тренажёрах прямо на сайте, а книги, видео и сайты переводи в один клик с умным помощником для macOS.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              <button id="heroStartTrainerBtn" type="button" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-300 hover:to-indigo-400 text-slate-950 font-bold text-sm sm:text-base shadow-lg shadow-sky-500/25 transition flex items-center gap-2">
+                <span>Открыть тренажёр глаголов</span>
+                <span>→</span>
+              </button>
+              <button id="heroExploreAppBtn" type="button" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-semibold text-sm sm:text-base transition flex items-center gap-2">
+                <span> Помощник для macOS</span>
+              </button>
+            </div>
+          </div>
 
-<!-- СЛАЙД 4: САЙТЫ И МАГАЗИНЫ -->
-<article class="slide">
-<div class="stage">
-<div class="demo" style="background:#f3f4f7;color:#171923">
-<div class="scene-tag">▣ ONLINE PRODAVNICA</div>
-<div style="background:white;color:#20212b;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;font-weight:850;font-size:19px">volta <span style="font-size:10px;font-weight:400">Laptop računari　 Telefoni　 TV</span></div>
-<div style="padding:18px 5%;color:#262738">
-<div style="font-size:11px;color:#6b6b7b">Početna / Laptop računari</div>
-<div style="font-size:clamp(20px,2.8vw,34px);font-weight:800;margin:13px 0">Laptop računari</div>
-<div style="background:white;border:1px solid #dddde5;border-radius:12px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center">
-<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80" alt="Ноутбук" style="width:100%;border-radius:8px" onerror="this.style.display='none'">
-<div><div style="font-size:11px;color:#666">Lenovo IdeaPad</div><div style="font-size:16px;font-weight:750;margin:9px 0">Tehničke karakteristike</div><div style="font-size:11px;line-height:1.7;color:#555">Procesor · Memorija · Garancija</div><div style="font-size:17px;font-weight:800;margin:10px 0">89.990 RSD</div><div style="background:#316df4;color:white;border-radius:7px;padding:9px;text-align:center;font-size:11px">Dodaj u korpu</div></div>
-</div>
-</div>
-<div class="callout" style="left:auto;right:4%;top:17%;width:49%">
-<div class="translation"><div class="tr-head"><span>● ● ●</span><span class="tr-brand">▱ SERBKA</span><span>⌘ S</span></div><div class="tr-body"><div class="tr-word">garancija　<span style="color:#9caeff">◖))</span></div><div class="pron">[гаранция]</div><span class="kind">Существительное · ж. род</span><div class="meaning">Гарантия</div><div class="example">Proverite uslove garancije.<br><span>Проверьте условия гарантии.</span></div><div class="tr-foot"><span>Сербский → Русский</span><span>☆　▢</span></div></div></div>
-</div>
-</div>
-<aside class="info"><div class="kicker">04 / Сайты и магазины</div><h2>Понимай, что покупаешь</h2><p>Характеристики, доставка, гарантия, условия возврата. Сербские сайты становятся понятнее без постоянного копирования текста.</p><ul><li><span class="check">✓</span>Названия характеристик</li><li><span class="check">✓</span>Условия покупки</li><li><span class="check">✓</span>Перевод отдельных слов</li></ul><div class="tip">Tehničke karakteristike — технические характеристики. Garancija — гарантия.</div></aside>
-</div>
-</article>
+          <!-- Interactive Preview Dual Cards -->
+          <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            <!-- Card 1: Interactive Learning Hub -->
+            <div class="mac-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden">
+              <div>
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-4 pb-3 border-b border-slate-800">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                    <span class="ml-2 font-mono text-sky-400">▱ SERBKA · ОБУЧЕНИЕ</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-medium">Доступно на сайте</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">Интерактивный тренажёр 130 главных глаголов</h3>
+                <p class="mt-2 text-sm text-slate-300 leading-relaxed">
+                  По методике Елены Подуст-Чичић («Сербский язык из Белграда с любовью»). Все 6 лиц настоящего времени, цветовая разбивка на <span class="text-sky-400 font-medium">А-класс</span>, <span class="text-rose-400 font-medium">I-класс</span> и <span class="text-emerald-400 font-medium">Е-класс</span>, тренировка возвратной частицы <code class="text-amber-300">se</code> и умная проверка ошибок.
+                </p>
+                <div class="mt-4 bg-slate-950/70 rounded-xl p-4 border border-slate-800/90 font-mono text-xs sm:text-sm space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-400">Глагол: <strong class="text-white">RAZMIŠLJATI</strong> (размышлять)</span>
+                    <span class="class-badge-A px-2 py-0.5 rounded text-[11px]">А-класс</span>
+                  </div>
+                  <div class="grid grid-cols-3 gap-2 pt-1 text-slate-300">
+                    <div class="bg-slate-900/90 p-2 rounded border border-slate-800"><span class="text-slate-500">ja</span> razmišljam</div>
+                    <div class="bg-slate-900/90 p-2 rounded border border-slate-800"><span class="text-slate-500">ti</span> razmišljaš</div>
+                    <div class="bg-slate-900/90 p-2 rounded border border-slate-800"><span class="text-slate-500">mi</span> razmišljamo</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <span class="text-xs text-slate-400">4 режима: Карточки · Письмо · Блиц · Таблица</span>
+                <button id="cardGoToLearnBtn" type="button" class="text-sm font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                  Начать тренировку →
+                </button>
+              </div>
+            </div>
 
-<div class="controls"><div class="dots"><button class="dotbtn active" aria-label="Книги"></button><button class="dotbtn" aria-label="Видео"></button><button class="dotbtn" aria-label="Обратный перевод"></button><button class="dotbtn" aria-label="Магазины"></button></div><div><button class="arrow" id="prev">← Назад</button> <button class="arrow" id="next">Следующий →</button></div></div>
-</div>
+            <!-- Card 2: macOS Context Assistant -->
+            <div class="mac-card rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-4 pb-3 border-b border-slate-800">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                    <span class="ml-2 font-mono text-indigo-400">▱ SERBKA · macOS ⌘ S</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium">Приложение для Mac</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">Мгновенный перевод в книгах, видео и браузере</h3>
+                <p class="mt-2 text-sm text-slate-300 leading-relaxed">
+                  Выдели любое слово или субтитры на экране — получи перевод, транскрипцию, род и объяснение живого контекста без переключения между окнами.
+                </p>
+                <div class="mt-4 bg-slate-950/70 rounded-xl p-4 border border-slate-800/90 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <span class="font-bold text-white text-base">iskustvo</span>
+                      <span class="text-xs text-slate-400 ml-2">[искуство] · сущ., ср. род</span>
+                    </div>
+                    <span class="text-xs font-mono text-sky-400">⌘ S</span>
+                  </div>
+                  <p class="text-xs text-emerald-300 font-medium">Опыт, пережитый опыт</p>
+                  <p class="text-xs text-slate-400 italic">«Život u Beogradu može biti izazovan, ali upravo to iskustvo čini ga posebnim.»</p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <span class="text-xs text-slate-400">Книги · PDF · Субтитры · Обратный перевод</span>
+                <button id="cardGoToAppBtn" type="button" class="text-sm font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                  Как работает приложение →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="previews">
-<button class="preview active" data-pick="0"><div class="thumb" style="background:#e9ddc4"><div style="padding:12px;font:13px Georgia;color:#31291e">Novi početak<br><br><span style="background:#8baeff">iskustvo</span><br><br>Život u Beogradu...</div></div><strong>▤ Книги и PDF</strong><small>Слово, предложение и контекст</small></button>
-<button class="preview" data-pick="1"><div class="thumb"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&q=75" alt=""></div><strong>▶ Видео и субтитры</strong><small>Перевод реплик и слов</small></button>
-<button class="preview" data-pick="2"><div class="thumb" style="background:linear-gradient(145deg,#5544a1,#14162b);padding:15px;color:white;font-size:12px"><b>РУС → SRB</b><p>Да ладно, не парься!</p><b style="color:#d0bfff">Ma daj, ne brini!</b></div><strong>⇄ Обратный перевод</strong><small>Разговорный сербский</small></button>
-<button class="preview" data-pick="3"><div class="thumb"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=75" alt=""></div><strong>▣ Сайты и магазины</strong><small>Покупки без языкового барьера</small></button>
-</div>
-</section>
+      <!-- Ecosystem Pillars Section -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-mono uppercase tracking-wider text-sky-400">Почему Serbka — это погружение</span>
+          <h2 class="mt-2 text-2xl sm:text-4xl font-bold text-white">Учи правила в тренажёре — закрепляй в реальной жизни</h2>
+          <p class="mt-3 text-sm sm:text-base text-slate-400">
+            Сайт постоянно пополняется новыми интерактивными материалами, чтобы ты не просто заучивал списки слов, а сразу начинал понимать живую сербскую речь.
+          </p>
+        </div>
 
-<section class="section" id="how"><div class="kicker">Меньше переключений · больше понимания</div><h2>Сербский в твоей повседневной жизни</h2><p>Учись на том, что смотришь, читаешь и используешь каждый день. Не только запоминай перевод, но и понимай, как слово работает в контексте.</p></section>
-<div class="cards">
-<div class="card"><div class="fi">ϟ</div><h3>Быстрый вызов</h3><p>Открой перевод горячей клавишей и возвращайся к своей задаче без лишних окон.</p></div>
-<div class="card"><div class="fi">▤</div><h3>Текст на экране</h3><p>Распознавание текста помогает там, где слово нельзя просто скопировать.</p></div>
-<div class="card"><div class="fi">⇄</div><h3>В обе стороны</h3><p>Разбирай сербские слова по-русски и подбирай сербские выражения для своих мыслей.</p></div>
-</div>
-<section class="cta" id="download"><h2>Пусть сербский станет понятнее.</h2><p>Один маленький помощник. Меньше переключений. Больше понимания каждый день.</p><a class="btn" href="https://github.com/nikishteniki-create/serbka/releases/latest/download/Serbka.dmg"> Скачать Serbka для macOS ↗</a></section>
-</main>
-<footer class="wrap"><span>© 2026 Serbka</span><div><a href="https://t.me/Nikidontspiri" target="_blank" rel="noopener noreferrer">Support в Telegram</a><a href="mailto:Nikidontspiri@gmail.com">Контакты</a></div></footer>
-<script>
-(()=> {
-const slides=[...document.querySelectorAll('.slide')];
-const dots=[...document.querySelectorAll('.dotbtn')];
-const previews=[...document.querySelectorAll('.preview')];
-let current=0,timer;
-function show(i){
- current=(i+slides.length)%slides.length;
- slides.forEach((s,n)=>s.classList.toggle('active',n===current));
- dots.forEach((d,n)=>d.classList.toggle('active',n===current));
- previews.forEach((p,n)=>p.classList.toggle('active',n===current));
-}
-function restart(){clearInterval(timer);timer=setInterval(()=>show(current+1),9000)}
-dots.forEach((b,i)=>b.addEventListener('click',()=>{show(i);restart()}));
-previews.forEach((b,i)=>b.addEventListener('click',()=>{show(i);restart()}));
-document.getElementById('prev').addEventListener('click',()=>{show(current-1);restart()});
-document.getElementById('next').addEventListener('click',()=>{show(current+1);restart()});
-show(0);restart();
-})();
-</script>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold mb-4">01</div>
+            <h3 class="text-lg font-bold text-white">Системная база глаголов</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              В сербском языке окончания настоящего времени легко предсказуемы, если знать гласную основы (<strong class="text-sky-400">-a-</strong>, <strong class="text-rose-400">-i-</strong> или <strong class="text-emerald-400">-e-</strong>) и форму 3-го лица мн. числа (<code class="text-slate-300">oni</code>). Тренажёр доводит это до автоматизма.
+            </p>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-bold mb-4">02</div>
+            <h3 class="text-lg font-bold text-white">Живые разговорные конструкции</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Возвратные глаголы с частицей <code class="text-amber-300">se</code> меняют порядок слов в зависимости от того, используешь ли ты местоимение: <em class="text-slate-200">«Zovem se Jelena»</em>, но <em class="text-slate-200">«Ja se zovem Jelena»</em>. Мы тренируем оба варианта.
+            </p>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold mb-4">03</div>
+            <h3 class="text-lg font-bold text-white">Постоянное развитие платформы</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Раздел «Обучение» на Serbka.com — это только первый шаг. Скоро здесь появятся тренажёры падежей, прошедшего и будущего времени, бытовых диалогов в Белграде и карточек из твоих книг.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: LEARNING & VERB TRAINER (ACTIVE BY DEFAULT) ==================== -->
+    <section id="viewLearn" class="py-8 sm:py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header Banner of Learn Section -->
+        <div class="mac-card rounded-2xl p-5 sm:p-7 mb-6 border border-slate-800">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 text-xs mb-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-400 border border-sky-500/30 font-semibold">Раздел обучения Serbka</span>
+                <span class="text-slate-400">По материалам списка Елены Подуст-Чичић («Сербский язык из Белграда с любовью»)</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                Тренажёр: 130 самых нужных глаголов сербского языка
+              </h1>
+              <p class="mt-1.5 text-sm text-slate-300 max-w-3xl">
+                Тренируй все 6 лиц настоящего времени (<span class="font-mono text-sky-300">ja, ti, on/ona/ono, mi, vi, oni/one/ona</span>), переключайся между классами спряжения и отслеживай свой прогресс.
+              </p>
+            </div>
+
+            <!-- Progress Stats Pill -->
+            <div class="flex items-center gap-3 bg-slate-950/80 border border-slate-800 rounded-2xl p-3.5 shrink-0">
+              <div class="text-center px-3 border-r border-slate-800">
+                <div id="statMasteredCount" class="text-xl font-extrabold text-emerald-400 font-mono">0 / 129</div>
+                <div class="text-[11px] text-slate-400">Изучено глаголов</div>
+              </div>
+              <div class="text-center px-3 border-r border-slate-800">
+                <div id="statStreakCount" class="text-xl font-extrabold text-amber-400 font-mono">0</div>
+                <div class="text-[11px] text-slate-400">Серия без ошибок</div>
+              </div>
+              <div class="text-center px-3">
+                <div id="statAccuracy" class="text-xl font-extrabold text-sky-400 font-mono">100%</div>
+                <div class="text-[11px] text-slate-400">Точность</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mode Switcher + Filters Bar -->
+          <div class="mt-6 pt-5 border-t border-slate-800/90 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+            <!-- 4 Learning Modes -->
+            <div class="grid grid-cols-2 sm:flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+              <button id="modeWriteBtn" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition bg-sky-500 text-slate-950 shadow">
+                ✍️ Тренажёр ввода
+              </button>
+              <button id="modeQuizBtn" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white">
+                ⚡ Блиц-тест (4 варианта)
+              </button>
+              <button id="modeFlashBtn" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white">
+                🗂 Карточки (6 форм)
+              </button>
+              <button id="modeTableBtn" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white">
+                📖 Таблица всех глаголов
+              </button>
+            </div>
+
+            <!-- Class & Reflexive Filter Pills -->
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="text-xs text-slate-400 mr-1">Фильтр:</span>
+              <button data-filter="ALL" class="filter-class-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-white border border-slate-600 transition">
+                Все (129)
+              </button>
+              <button data-filter="A" class="filter-class-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900/90 text-sky-400 border border-sky-500/30 hover:bg-sky-500/10 transition">
+                А-класс (47)
+              </button>
+              <button data-filter="I" class="filter-class-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900/90 text-rose-400 border border-rose-500/30 hover:bg-rose-500/10 transition">
+                I-класс (45)
+              </button>
+              <button data-filter="E" class="filter-class-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900/90 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/10 transition">
+                Е-класс (37)
+              </button>
+              <button data-filter="SE" class="filter-class-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900/90 text-amber-300 border border-amber-500/30 hover:bg-amber-500/10 transition">
+                Возвратные (se)*
+              </button>
+              <button data-filter="MISTAKES" id="filterMistakesBtn" class="filter-class-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900/90 text-purple-300 border border-purple-500/30 hover:bg-purple-500/10 transition">
+                Мои ошибки (0)
+              </button>
+            </div>
+          </div>
+
+          <!-- Pronoun Filter Row (for Write and Quiz modes) -->
+          <div id="pronounFilterBar" class="mt-3 pt-3 border-t border-slate-800/50 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="text-slate-400 mr-1">Какие лица тренировать:</span>
+              <button data-person="ALL" class="person-filter-btn px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40 font-mono font-semibold">Все 6 лиц</button>
+              <button data-person="PDF_CORE" class="person-filter-btn px-2.5 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">Только ja + oni (как в таблице)</button>
+              <button data-person="ja" class="person-filter-btn px-2 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">ja</button>
+              <button data-person="ti" class="person-filter-btn px-2 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">ti</button>
+              <button data-person="on" class="person-filter-btn px-2 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">on/ona/ono</button>
+              <button data-person="mi" class="person-filter-btn px-2 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">mi</button>
+              <button data-person="vi" class="person-filter-btn px-2 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">vi</button>
+              <button data-person="oni" class="person-filter-btn px-2 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white">oni/one/ona</button>
+            </div>
+            <button id="toggleGrammarRuleBtn" type="button" class="text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1">
+              <span>ℹ️ Шпаргалка по спряжениям и частице se</span>
+            </button>
+          </div>
+
+          <!-- Collapsible Grammar Cheat Sheet -->
+          <div id="grammarCheatSheet" class="hidden mt-4 p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-xs sm:text-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-white">Как работают классы спряжения и частица «se» в сербском</h4>
+              <button id="closeGrammarRuleBtn" type="button" class="text-slate-400 hover:text-white">✕ Закрыть</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+              <div class="p-3 rounded-lg bg-sky-950/30 border border-sky-500/30">
+                <div class="font-bold text-sky-400 mb-1">А-класс (А-спряжение)</div>
+                <p class="text-slate-300 text-xs">Основа на <strong>-a-</strong> (IMATI → im<u>a</u>m). Окончания: <code>-am, -aš, -a, -amo, -ate, -aju</code>.</p>
+              </div>
+              <div class="p-3 rounded-lg bg-rose-950/30 border border-rose-500/30">
+                <div class="font-bold text-rose-400 mb-1">I-класс (I-спряжение)</div>
+                <p class="text-slate-300 text-xs">Основа на <strong>-i-</strong> (RADITI → rad<u>i</u>m). В 3 л. мн. ч. (oni) окончание <strong>-e</strong>: <code>radim, radiš, radi, radimo, radite, rade</code>.</p>
+              </div>
+              <div class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30">
+                <div class="font-bold text-emerald-400 mb-1">Е-класс (Е-спряжение)</div>
+                <p class="text-slate-300 text-xs">Основа на <strong>-e-</strong> (IĆI → id<u>e</u>m, PUTOVATI → putuj<u>e</u>m). В 3 л. мн. ч. (oni) окончание <strong>-u</strong> (кроме <em>razumeju, uspeju</em>).</p>
+              </div>
+              <div class="p-3 rounded-lg bg-amber-950/30 border border-amber-500/30">
+                <div class="font-bold text-amber-300 mb-1">* Возвратные глаголы (se)</div>
+                <p class="text-slate-300 text-xs">Без местоимения <code>se</code> ставится после глагола: <strong>zovem se</strong> / <strong>zovu se</strong>. С местоимением — сразу после него: <strong>ja se zovem</strong> / <strong>oni se zovu</strong>. Тренажёр принимает оба варианта!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== MODE 1: WRITE TRAINER ==================== -->
+        <div id="panelWrite" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 mac-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <!-- Top status row inside trainer card -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span id="writeVerbNumber" class="font-mono text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300">#1</span>
+                  <span id="writeVerbClassBadge" class="class-badge-A text-xs font-semibold px-2.5 py-0.5 rounded-full">А-класс</span>
+                  <span id="writeReflexiveBadge" class="hidden text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">Возвратный (se)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="markMasteredWriteBtn" type="button" class="text-xs px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">
+                    ☆ Отметить изученным
+                  </button>
+                  <button id="nextWriteQuestionBtn" type="button" class="text-xs px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-sky-400 border border-slate-700 transition">
+                    Пропустить →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Verb Prompt Display -->
+              <div class="mt-6 text-center sm:text-left">
+                <div class="text-xs uppercase tracking-wider font-mono text-slate-400">Инфинитив и значение</div>
+                <div class="mt-1 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+                  <h2 id="writeInfinitive" class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">IMATI</h2>
+                  <p id="writeTranslation" class="text-base sm:text-xl text-sky-300 font-medium">иметь</p>
+                </div>
+              </div>
+
+              <!-- Target Person Box -->
+              <div class="mt-6 p-4 sm:p-5 rounded-2xl bg-slate-950/90 border border-slate-800/90 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <div class="text-xs text-slate-400">Поставь глагол в форму настоящего времени для лица:</div>
+                  <div class="mt-1 flex items-baseline gap-3">
+                    <span id="writePronounSr" class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono">ja</span>
+                    <span id="writePronounRu" class="text-sm text-slate-300">(я — 1 л. ед. ч.)</span>
+                  </div>
+                </div>
+                <div id="writeReflexiveHint" class="hidden text-xs text-amber-200/90 bg-amber-500/10 border border-amber-500/25 rounded-xl px-3.5 py-2 max-w-xs">
+                  Можно ввести без местоимения (<code class="font-mono">... se</code>) или с ним (<code class="font-mono">ja se ...</code>)
+                </div>
+              </div>
+
+              <!-- Input + Serbian Character Buttons -->
+              <div class="mt-6">
+                <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                  <span class="text-xs text-slate-400 mr-1">Сербские буквы:</span>
+                  <button type="button" data-char="č" class="char-insert-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-mono text-sm font-semibold border border-slate-700 transition">č</button>
+                  <button type="button" data-char="ć" class="char-insert-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-mono text-sm font-semibold border border-slate-700 transition">ć</button>
+                  <button type="button" data-char="ž" class="char-insert-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-mono text-sm font-semibold border border-slate-700 transition">ž</button>
+                  <button type="button" data-char="š" class="char-insert-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-mono text-sm font-semibold border border-slate-700 transition">š</button>
+                  <button type="button" data-char="đ" class="char-insert-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-mono text-sm font-semibold border border-slate-700 transition">đ</button>
+                </div>
+
+                <form id="writeForm" class="flex flex-col sm:flex-row gap-3">
+                  <input
+                    id="writeInput"
+                    type="text"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    placeholder="Введи форму на сербской латинице..."
+                    class="flex-1 px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-700 focus:border-sky-400 focus:outline-none text-white font-mono text-base sm:text-lg"
+                  />
+                  <button id="writeSubmitBtn" type="submit" class="px-6 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm sm:text-base transition shrink-0">
+                    Проверить ↵
+                  </button>
+                  <button id="writeShowAnswerBtn" type="button" class="px-4 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm transition shrink-0">
+                    Подсказка
+                  </button>
+                </form>
+              </div>
+
+              <!-- Feedback Banner -->
+              <div id="writeFeedbackBox" class="hidden mt-5 p-4 rounded-xl border text-sm"></div>
+            </div>
+
+            <!-- Bottom Example Box -->
+            <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+              <div>
+                <span class="text-slate-500 uppercase font-mono">Пример в контексте:</span>
+                <span id="writeExampleSr" class="ml-2 text-slate-200 font-medium">Imam jedno pitanje za tebe.</span>
+                <span id="writeExampleRu" class="ml-1 text-slate-400">— У меня есть один вопрос к тебе.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Sidebar: Full Conjugation Preview & Quick Reference -->
+          <div class="mac-card rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <span class="text-xs font-mono uppercase tracking-wider text-sky-400">▱ Карточка спряжения</span>
+                <button id="toggleRevealSidebarBtn" type="button" class="text-xs text-slate-400 hover:text-white underline">
+                  Показать / скрыть все лица
+                </button>
+              </div>
+
+              <p class="mt-3 text-xs text-slate-400">
+                После ответа (или по кнопке выше) здесь открываются все 6 форм текущего глагола для запоминания системы окончаний:
+              </p>
+
+              <div id="sidebarConjugationList" class="mt-4 space-y-2 font-mono text-sm">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-xs text-slate-400 space-y-2">
+              <div class="flex items-center justify-between">
+                <span>Из книги (1 л. ед. ч.):</span>
+                <span id="sidebarPdfJa" class="font-mono text-white font-semibold">imam</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Из книги (3 л. мн. ч.):</span>
+                <span id="sidebarPdfOni" class="font-mono text-white font-semibold">imaju</span>
+              </div>
+              <button id="resetProgressBtn" type="button" class="w-full mt-2 py-2 rounded-lg bg-slate-900 hover:bg-rose-950/40 text-slate-400 hover:text-rose-300 border border-slate-800 text-xs transition">
+                Сбросить статистику тренировок
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== MODE 2: QUIZ (4 OPTIONS BLITZ) ==================== -->
+        <div id="panelQuiz" class="hidden">
+          <div class="max-w-3xl mx-auto mac-card rounded-2xl p-6 sm:p-8">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span id="quizVerbNumber" class="font-mono text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300">#1</span>
+                <span id="quizVerbClassBadge" class="class-badge-A text-xs font-semibold px-2.5 py-0.5 rounded-full">А-класс</span>
+              </div>
+              <span class="text-xs text-slate-400">Выбери правильную форму из 4 вариантов</span>
+            </div>
+
+            <div class="mt-6 text-center">
+              <div class="text-xs font-mono uppercase text-slate-400">Глагол</div>
+              <h2 id="quizInfinitive" class="mt-1 text-3xl sm:text-4xl font-extrabold text-white font-mono">GLEDATI</h2>
+              <p id="quizTranslation" class="mt-1 text-lg text-sky-300 font-medium">смотреть</p>
+
+              <div class="mt-5 inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-slate-950 border border-slate-800">
+                <span class="text-xs text-slate-400">Лицо:</span>
+                <span id="quizPronounSr" class="text-xl font-extrabold text-amber-400 font-mono">oni / one / ona</span>
+                <span id="quizPronounRu" class="text-xs text-slate-400">(они)</span>
+              </div>
+            </div>
+
+            <div id="quizOptionsGrid" class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <!-- 4 Option buttons injected by JS -->
+            </div>
+
+            <div id="quizFeedbackBox" class="hidden mt-6 p-4 rounded-xl border text-sm"></div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span id="quizExampleText" class="text-xs text-slate-400 italic">Uveče gledamo srpske filmove.</span>
+              <button id="nextQuizBtn" type="button" class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm transition">
+                Следующий вопрос →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== MODE 3: FLASHCARDS (ALL 6 FORMS) ==================== -->
+        <div id="panelFlash" class="hidden">
+          <div class="max-w-3xl mx-auto">
+            <div class="mac-card rounded-2xl p-6 sm:p-8">
+              <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span id="flashIndexLabel" class="font-mono text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300">1 / 129</span>
+                  <span id="flashClassBadge" class="class-badge-A text-xs font-semibold px-2.5 py-0.5 rounded-full">А-класс</span>
+                </div>
+                <button id="flashMasterBtn" type="button" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition">
+                  ☆ Изучено
+                </button>
+              </div>
+
+              <div class="my-8 text-center">
+                <p class="text-xs font-mono uppercase tracking-wider text-slate-400">Инфинитив (с выделенной основой из книги)</p>
+                <h2 id="flashInfinitive" class="mt-2 text-3xl sm:text-5xl font-extrabold text-white font-mono tracking-tight">IMATI</h2>
+                <p id="flashRu" class="mt-3 text-lg sm:text-2xl text-sky-300 font-medium">иметь</p>
+                <div class="mt-4 inline-flex items-center gap-4 text-xs font-mono text-slate-300 bg-slate-950/90 px-4 py-2 rounded-xl border border-slate-800">
+                  <span>1 л. ед. ч. (ja): <strong id="flashJaPdf" class="text-sky-400">imam</strong></span>
+                  <span>·</span>
+                  <span>3 л. мн. ч. (oni): <strong id="flashOniPdf" class="text-sky-400">imaju</strong></span>
+                </div>
+              </div>
+
+              <!-- All 6 Conjugations Grid -->
+              <div id="flashSixGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 font-mono text-sm">
+                <!-- Populated by JS -->
+              </div>
+
+              <div class="mt-6 p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 text-center">
+                <p id="flashExampleSr" class="text-sm font-semibold text-white">Imam jedno pitanje za tebe.</p>
+                <p id="flashExampleRu" class="text-xs text-slate-400 mt-1">У меня есть один вопрос к тебе.</p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
+                <button id="flashPrevBtn" type="button" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 text-sm font-medium transition">
+                  ← Предыдущий
+                </button>
+                <button id="flashRandomBtn" type="button" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-sky-400 border border-slate-700 text-sm font-medium transition">
+                  🎲 Случайный глагол
+                </button>
+                <button id="flashNextBtn" type="button" class="px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-sm font-bold transition">
+                  Следующий →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== MODE 4: INTERACTIVE REFERENCE TABLE (ALL 130 VERBS) ==================== -->
+        <div id="panelTable" class="hidden">
+          <div class="mac-card rounded-2xl p-4 sm:p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+              <div>
+                <h2 class="text-lg font-bold text-white">Полный интерактивный справочник глаголов из книги</h2>
+                <p class="text-xs text-slate-400">Нажми на любой глагол в таблице, чтобы раскрыть все 6 лиц настоящего времени и пример.</p>
+              </div>
+              <div class="relative w-full sm:w-80">
+                <input
+                  id="tableSearchInput"
+                  type="text"
+                  placeholder="Поиск по-сербски или по-русски (напр. ići, идти)..."
+                  class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 focus:border-sky-400 focus:outline-none text-xs sm:text-sm text-white"
+                />
+              </div>
+            </div>
+
+            <div class="mt-4 overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-800 text-[11px] font-mono uppercase text-slate-400">
+                    <th class="py-3 px-3">#</th>
+                    <th class="py-3 px-3">Класс</th>
+                    <th class="py-3 px-3">Глагол (Инфинитив)</th>
+                    <th class="py-3 px-3">1 л. ед. ч. (ja)</th>
+                    <th class="py-3 px-3">3 л. мн. ч. (oni/one/ona)</th>
+                    <th class="py-3 px-3">Перевод</th>
+                    <th class="py-3 px-3 text-right">Все 6 лиц</th>
+                  </tr>
+                </thead>
+                <tbody id="verbsTableBody" class="divide-y divide-slate-800/70 text-xs sm:text-sm">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: macOS ASSISTANT SHOWCASE ==================== -->
+    <section id="viewApp" class="hidden py-12 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-medium mb-4">
+            <span> Умный помощник для macOS</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Понимай сербский везде, где ты уже работаешь
+          </h1>
+          <p class="mt-4 text-base text-slate-300">
+            Выдели слово или предложение на экране и нажми <code class="px-2 py-0.5 rounded bg-slate-800 text-sky-300 font-mono">⌘ S</code>. Читай книги и PDF, смотри сериалы с субтитрами, покупай в сербских интернет-магазинах и переводи свои мысли на живой разговорный сербский.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Feature 01 -->
+          <div class="mac-card rounded-2xl p-6">
+            <div class="text-xs font-mono text-sky-400 mb-2">01 / КНИГИ И PDF</div>
+            <h3 class="text-xl font-bold text-white">От одного слова — до целого предложения</h3>
+            <p class="mt-2 text-sm text-slate-300">
+              Читай сербскую книгу или договор аренды в своём темпе. Непонятно слово — посмотри перевод, род и ударение. Неясна мысль — переведи абзац целиком.
+            </p>
+            <div class="mt-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-1.5">
+              <div class="text-sky-400 font-bold">▱ SERBKA · ПРЕДЛОЖЕНИЕ ⌘ S</div>
+              <div class="text-slate-200">«Vremenom ćeš bolje razumeti kako sve funkcioniše.»</div>
+              <div class="text-emerald-300">Со временем ты лучше поймёшь, как всё устроено.</div>
+            </div>
+          </div>
+
+          <!-- Feature 02 -->
+          <div class="mac-card rounded-2xl p-6">
+            <div class="text-xs font-mono text-indigo-400 mb-2">02 / ВИДЕО И СУБТИТРЫ</div>
+            <h3 class="text-xl font-bold text-white">Понимай, что говорят герои в сериалах</h3>
+            <p class="mt-2 text-sm text-slate-300">
+              Разбирай реплики из сербских фильмов, YouTube и интервью по частям без копирования текста в браузерный переводчик.
+            </p>
+            <div class="mt-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-1.5">
+              <div class="text-indigo-400 font-bold">▶ VIDEO · SRPSKI</div>
+              <div class="text-slate-200">«Hajde, probaj nešto novo!»</div>
+              <div class="text-emerald-300">Hajde — давай · probaj — попробуй · nešto novo — что-нибудь новое</div>
+            </div>
+          </div>
+
+          <!-- Feature 03 -->
+          <div class="mac-card rounded-2xl p-6">
+            <div class="text-xs font-mono text-emerald-400 mb-2">03 / ОБРАТНЫЙ ПЕРЕВОД (РУС → SRB)</div>
+            <h3 class="text-xl font-bold text-white">Не просто перевод, а живая сербская речь</h3>
+            <p class="mt-2 text-sm text-slate-300">
+              Хочешь сказать что-то естественно, но в голове только русская фраза? Serbka подскажет разговорный вариант и объяснит оттенок смысла.
+            </p>
+            <div class="mt-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-1.5">
+              <div class="text-slate-400">Запрос: «Да ладно, не парься!»</div>
+              <div class="text-emerald-300 font-bold">→ Ma daj, ne brini!</div>
+              <div class="text-slate-400">Ma daj — разговорное «да брось», Ne brini — «не переживай».</div>
+            </div>
+          </div>
+
+          <!-- Feature 04 -->
+          <div class="mac-card rounded-2xl p-6">
+            <div class="text-xs font-mono text-amber-400 mb-2">04 / САЙТЫ И МАГАЗИНЫ</div>
+            <h3 class="text-xl font-bold text-white">Покупки и сервисы в Сербии без барьера</h3>
+            <p class="mt-2 text-sm text-slate-300">
+              Характеристики техники, условия доставки, банковские приложения и объявления о квартирах становятся понятными прямо поверх окна.
+            </p>
+            <div class="mt-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-1.5">
+              <div class="text-amber-300 font-bold">garancija [гаранция] · ж. род</div>
+              <div class="text-slate-200">Proverite uslove garancije i isporuke.</div>
+              <div class="text-emerald-300">Проверьте условия гарантии и доставки.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: ROADMAP ("СКОРО НА SERBKA") ==================== -->
+    <section id="viewRoadmap" class="hidden py-12 sm:py-16">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <span class="text-xs font-mono uppercase tracking-wider text-sky-400">План развития экосистемы</span>
+          <h1 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Что скоро появится на Serbka.com</h1>
+          <p class="mt-3 text-sm sm:text-base text-slate-300">
+            Мы превращаем Serbka в полноценный интерактивный портал для погружения в сербский язык.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="mac-card rounded-2xl p-5 flex items-start gap-4 border-l-4 border-l-emerald-400">
+            <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold shrink-0">УЖЕ ДОСТУПНО</span>
+            <div>
+              <h3 class="font-bold text-white text-base">Тренажёр 130 главных глаголов (Настоящее время · Prezent)</h3>
+              <p class="text-sm text-slate-300 mt-1">Все 6 лиц, классы А / I / Е, возвратные глаголы с частицей se, блиц-тест и интерактивный справочник.</p>
+            </div>
+          </div>
+
+          <div class="mac-card rounded-2xl p-5 flex items-start gap-4 border-l-4 border-l-sky-400">
+            <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300 font-mono text-xs font-bold shrink-0">СКОРО · ЭТАП 2</span>
+            <div>
+              <h3 class="font-bold text-white text-base">Тренажёр прошедшего (Perfekat) и будущего (Futur I) времени</h3>
+              <p class="text-sm text-slate-300 mt-1">Отработка кратких форм глагола «jesam / hteti» (sam, si, je / ću, ćeš, će) и порядка энклитик в предложении.</p>
+            </div>
+          </div>
+
+          <div class="mac-card rounded-2xl p-5 flex items-start gap-4 border-l-4 border-l-indigo-400">
+            <span class="px-2.5 py-1 rounded bg-indigo-500/20 text-indigo-300 font-mono text-xs font-bold shrink-0">СКОРО · ЭТАП 3</span>
+            <div>
+              <h3 class="font-bold text-white text-base">Живые диалоги: Белград и Нови-Сад</h3>
+              <p class="text-sm text-slate-300 mt-1">Интерактивные сценки: в пекарне, на рынке (pijaca), у врача, в банке и при аренде квартиры.</p>
+            </div>
+          </div>
+
+          <div class="mac-card rounded-2xl p-5 flex items-start gap-4 border-l-4 border-l-amber-400">
+            <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-xs font-bold shrink-0">СКОРО · ЭТАП 4</span>
+            <div>
+              <h3 class="font-bold text-white text-base">Синхронизация словаря с приложением Serbka для macOS</h3>
+              <p class="text-sm text-slate-300 mt-1">Все слова, которые ты переводишь через ⌘ S при чтении книг и просмотре сериалов, автоматически попадают в твой личный тренажёр на сайте.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL FOR DOWNLOAD / CONTACT -->
+  <div id="downloadModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="mac-card rounded-2xl max-w-md w-full p-6 border border-slate-700">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <span class="font-bold text-white flex items-center gap-2"> Скачать Serbka для macOS</span>
+        <button id="closeDownloadModalBtn" type="button" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <p class="mt-4 text-sm text-slate-300 leading-relaxed">
+        Умный помощник Serbka работает поверх любых окон на macOS (книги, PDF, браузер и видеоплееры). Пока приложение скачивается, ты можешь тренировать все 130 сербских глаголов прямо в браузере!
+      </p>
+      <div class="mt-5 flex flex-col gap-2.5">
+        <a href="https://serbka.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-center text-sm transition">
+          Перейти к загрузке на serbka.com ↗
+        </a>
+        <button id="modalGoToTrainerBtn" type="button" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium transition">
+          Остаться в тренажёре глаголов
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 py-8 mt-12 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white">▱ Serbka</span>
+        <span>·</span>
+        <span>Погружение в сербский язык без языкового барьера</span>
+      </div>
+      <div class="text-center sm:text-right">
+        <span>База глаголов: Елена Подуст-Чичић («Сербский язык из Белграда с любовью»)</span>
+        <span class="mx-2">·</span>
+        <span>© 2026 Serbka.com</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- APPLICATION SCRIPT -->
+  <script>
+    const VERBS_DATA = [{"id": 1, "infinitive": "IMATI", "rawInfinitive": "IMATI", "verbClass": "A", "reflexive": "none", "jaPdf": "imam", "oniPdf": "imaju", "forms": {"ja": "imam", "ti": "imaš", "on": "ima", "mi": "imamo", "vi": "imate", "oni": "imaju"}, "ru": "иметь", "exampleSr": "Imam jedno pitanje za tebe.", "exampleRu": "У меня есть один вопрос к тебе."}, {"id": 2, "infinitive": "ZNATI", "rawInfinitive": "ZNATI", "verbClass": "A", "reflexive": "none", "jaPdf": "znam", "oniPdf": "znaju", "forms": {"ja": "znam", "ti": "znaš", "on": "zna", "mi": "znamo", "vi": "znate", "oni": "znaju"}, "ru": "знать, уметь", "exampleSr": "Znam gde je dobra kafana.", "exampleRu": "Я знаю, где хорошая кафана."}, {"id": 3, "infinitive": "GLEDATI", "rawInfinitive": "GLEDATI", "verbClass": "A", "reflexive": "none", "jaPdf": "gledam", "oniPdf": "gledaju", "forms": {"ja": "gledam", "ti": "gledaš", "on": "gleda", "mi": "gledamo", "vi": "gledate", "oni": "gledaju"}, "ru": "смотреть", "exampleSr": "Uveče gledamo srpske filmove.", "exampleRu": "Вечером мы смотрим сербские фильмы."}, {"id": 4, "infinitive": "SLUŠATI", "rawInfinitive": "SLUŠATI", "verbClass": "A", "reflexive": "none", "jaPdf": "slušam", "oniPdf": "slušaju", "forms": {"ja": "slušam", "ti": "slušaš", "on": "sluša", "mi": "slušamo", "vi": "slušate", "oni": "slušaju"}, "ru": "слушать", "exampleSr": "Slušam muziku dok radim.", "exampleRu": "Я слушаю музыку, пока работаю."}, {"id": 5, "infinitive": "ČEKATI", "rawInfinitive": "ČEKATI", "verbClass": "A", "reflexive": "none", "jaPdf": "čekam", "oniPdf": "čekaju", "forms": {"ja": "čekam", "ti": "čekaš", "on": "čeka", "mi": "čekamo", "vi": "čekate", "oni": "čekaju"}, "ru": "ждать", "exampleSr": "Čekamo autobus već deset minuta.", "exampleRu": "Мы ждём автобус уже десять минут."}, {"id": 6, "infinitive": "PITATI", "rawInfinitive": "PITATI", "verbClass": "A", "reflexive": "none", "jaPdf": "pitam", "oniPdf": "pitaju", "forms": {"ja": "pitam", "ti": "pitaš", "on": "pita", "mi": "pitamo", "vi": "pitate", "oni": "pitaju"}, "ru": "спрашивать", "exampleSr": "Slobodno pitaj ako nešto nije jasno.", "exampleRu": "Свободно спрашивай, если что-то непонятно."}, {"id": 7, "infinitive": "ODGOVARATI", "rawInfinitive": "ODGOVARATI", "verbClass": "A", "reflexive": "none", "jaPdf": "odgovaram", "oniPdf": "odgovaraju", "forms": {"ja": "odgovaram", "ti": "odgovaraš", "on": "odgovara", "mi": "odgovaramo", "vi": "odgovarate", "oni": "odgovaraju"}, "ru": "отвечать", "exampleSr": "Uvek brzo odgovaraš na poruke.", "exampleRu": "Ты всегда быстро отвечаешь на сообщения."}, {"id": 8, "infinitive": "IGRATI (SE)", "rawInfinitive": "IGRATI (SE)*", "verbClass": "A", "reflexive": "optional", "jaPdf": "igram (se)", "oniPdf": "igraju (se)", "forms": {"ja": "igram", "ti": "igraš", "on": "igra", "mi": "igramo", "vi": "igrate", "oni": "igraju"}, "ru": "танцевать, играть", "exampleSr": "Deca se igraju u parku.", "exampleRu": "Дети играют в парке."}, {"id": 9, "infinitive": "PLIVATI", "rawInfinitive": "PLIVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "plivam", "oniPdf": "plivaju", "forms": {"ja": "plivam", "ti": "plivaš", "on": "pliva", "mi": "plivamo", "vi": "plivate", "oni": "plivaju"}, "ru": "плавать", "exampleSr": "Leti plivamo na Adi Ciganliji.", "exampleRu": "Летом мы плаваем на Аде Циганлии."}, {"id": 10, "infinitive": "PLANIRATI", "rawInfinitive": "PLANIRATI", "verbClass": "A", "reflexive": "none", "jaPdf": "planiram", "oniPdf": "planiraju", "forms": {"ja": "planiram", "ti": "planiraš", "on": "planira", "mi": "planiramo", "vi": "planirate", "oni": "planiraju"}, "ru": "планировать", "exampleSr": "Planiramo putovanje na Zlatibor.", "exampleRu": "Мы планируем поездку на Златибор."}, {"id": 11, "infinitive": "SLIKATI", "rawInfinitive": "SLIKATI", "verbClass": "A", "reflexive": "none", "jaPdf": "slikam", "oniPdf": "slikaju", "forms": {"ja": "slikam", "ti": "slikaš", "on": "slika", "mi": "slikamo", "vi": "slikate", "oni": "slikaju"}, "ru": "рисовать, фотографировать", "exampleSr": "Turisti slikaju Kalemegdan.", "exampleRu": "Туристы фотографируют Калемегдан."}, {"id": 12, "infinitive": "CRTATI", "rawInfinitive": "CRTATI", "verbClass": "A", "reflexive": "none", "jaPdf": "crtam", "oniPdf": "crtaju", "forms": {"ja": "crtam", "ti": "crtaš", "on": "crta", "mi": "crtamo", "vi": "crtate", "oni": "crtaju"}, "ru": "чертить, рисовать", "exampleSr": "Ona lepo crta portrete.", "exampleRu": "Она красиво рисует портреты."}, {"id": 13, "infinitive": "ŠETATI (SE)", "rawInfinitive": "ŠETATI (SE)*", "verbClass": "A", "reflexive": "optional", "jaPdf": "šetam (se)", "oniPdf": "šetaju (se)", "forms": {"ja": "šetam", "ti": "šetaš", "on": "šeta", "mi": "šetamo", "vi": "šetate", "oni": "šetaju"}, "ru": "гулять", "exampleSr": "Volim da se šetam pored reke.", "exampleRu": "Я люблю гулять вдоль реки."}, {"id": 14, "infinitive": "RAZMIŠLJATI", "rawInfinitive": "RAZMIŠLJATI", "verbClass": "A", "reflexive": "none", "jaPdf": "razmišljam", "oniPdf": "razmišljaju", "forms": {"ja": "razmišljam", "ti": "razmišljaš", "on": "razmišlja", "mi": "razmišljamo", "vi": "razmišljate", "oni": "razmišljaju"}, "ru": "размышлять, обдумывать", "exampleSr": "Razmišljam o novom projektu.", "exampleRu": "Я размышляю о новом проекте."}, {"id": 15, "infinitive": "OTVARATI", "rawInfinitive": "OTVARATI", "verbClass": "A", "reflexive": "none", "jaPdf": "otvaram", "oniPdf": "otvaraju", "forms": {"ja": "otvaram", "ti": "otvaraš", "on": "otvara", "mi": "otvaramo", "vi": "otvarate", "oni": "otvaraju"}, "ru": "открывать", "exampleSr": "Pekara se otvara u šest ujutru.", "exampleRu": "Пекарня открывается в шесть утра."}, {"id": 16, "infinitive": "ZATVARATI", "rawInfinitive": "ZATVARATI", "verbClass": "A", "reflexive": "none", "jaPdf": "zatvaram", "oniPdf": "zatvaraju", "forms": {"ja": "zatvaram", "ti": "zatvaraš", "on": "zatvara", "mi": "zatvaramo", "vi": "zatvarate", "oni": "zatvaraju"}, "ru": "закрывать", "exampleSr": "Molim te, zatvaraj vrata.", "exampleRu": "Пожалуйста, закрывай дверь."}, {"id": 17, "infinitive": "KUVATI", "rawInfinitive": "KUVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "kuvam", "oniPdf": "kuvaju", "forms": {"ja": "kuvam", "ti": "kuvaš", "on": "kuva", "mi": "kuvamo", "vi": "kuvate", "oni": "kuvaju"}, "ru": "готовить (еду), варить", "exampleSr": "Danas kuvam domaću supu.", "exampleRu": "Сегодня я готовлю домашний суп."}, {"id": 18, "infinitive": "SPREMATI", "rawInfinitive": "SPREMATI", "verbClass": "A", "reflexive": "none", "jaPdf": "spremam", "oniPdf": "spremaju", "forms": {"ja": "spremam", "ti": "spremaš", "on": "sprema", "mi": "spremamo", "vi": "spremate", "oni": "spremaju"}, "ru": "готовить, подготавливать, убирать (дом)", "exampleSr": "Spremamo stan za goste.", "exampleRu": "Мы убираем квартиру к приходу гостей."}, {"id": 19, "infinitive": "OSEĆATI (SE)", "rawInfinitive": "OSEĆATI (SE)*", "verbClass": "A", "reflexive": "optional", "jaPdf": "osećam (se)", "oniPdf": "osećaju (se)", "forms": {"ja": "osećam", "ti": "osećaš", "on": "oseća", "mi": "osećamo", "vi": "osećate", "oni": "osećaju"}, "ru": "чувствовать (чувствовать себя)", "exampleSr": "Danas se osećam odlično.", "exampleRu": "Сегодня я чувствую себя отлично."}, {"id": 20, "infinitive": "OSTAVLJATI", "rawInfinitive": "OSTAVLJATI", "verbClass": "A", "reflexive": "none", "jaPdf": "ostavljam", "oniPdf": "ostavljaju", "forms": {"ja": "ostavljam", "ti": "ostavljaš", "on": "ostavlja", "mi": "ostavljamo", "vi": "ostavljate", "oni": "ostavljaju"}, "ru": "оставлять", "exampleSr": "Uvek ostavljaš ključeve na stolu.", "exampleRu": "Ты всегда оставляешь ключи на столе."}, {"id": 21, "infinitive": "ČUVATI", "rawInfinitive": "ČUVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "čuvam", "oniPdf": "čuvaju", "forms": {"ja": "čuvam", "ti": "čuvaš", "on": "čuva", "mi": "čuvamo", "vi": "čuvate", "oni": "čuvaju"}, "ru": "хранить, беречь, оберегать", "exampleSr": "Čuvaj zdravlje i mir.", "exampleRu": "Береги здоровье и покой."}, {"id": 22, "infinitive": "DOZVOLJAVATI", "rawInfinitive": "DOZVOLJAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "dozvoljavam", "oniPdf": "dozvoljavaju", "forms": {"ja": "dozvoljavam", "ti": "dozvoljavaš", "on": "dozvoljava", "mi": "dozvoljavamo", "vi": "dozvoljavate", "oni": "dozvoljavaju"}, "ru": "разрешать, позволять", "exampleSr": "Ovde ne dozvoljavaju parkiranje.", "exampleRu": "Здесь не разрешают парковку."}, {"id": 23, "infinitive": "IZGLEDATI", "rawInfinitive": "IZGLEDATI", "verbClass": "A", "reflexive": "none", "jaPdf": "izgledam", "oniPdf": "izgledaju", "forms": {"ja": "izgledam", "ti": "izgledaš", "on": "izgleda", "mi": "izgledamo", "vi": "izgledate", "oni": "izgledaju"}, "ru": "выглядеть, казаться", "exampleSr": "Beograd izgleda prelepo u proleće.", "exampleRu": "Белград выглядит прекрасно весной."}, {"id": 24, "infinitive": "SIPATI", "rawInfinitive": "SIPATI", "verbClass": "A", "reflexive": "none", "jaPdf": "sipam", "oniPdf": "sipaju", "forms": {"ja": "sipam", "ti": "sipaš", "on": "sipa", "mi": "sipamo", "vi": "sipate", "oni": "sipaju"}, "ru": "наливать, накладывать", "exampleSr": "Sipaj mi malo vode, molim te.", "exampleRu": "Налей мне немного воды, пожалуйста."}, {"id": 25, "infinitive": "PLAĆATI", "rawInfinitive": "PLAĆATI", "verbClass": "A", "reflexive": "none", "jaPdf": "plaćam", "oniPdf": "plaćaju", "forms": {"ja": "plaćam", "ti": "plaćaš", "on": "plaća", "mi": "plaćamo", "vi": "plaćate", "oni": "plaćaju"}, "ru": "платить, выплачивать", "exampleSr": "Da li plaćate karticom ili gotovinom?", "exampleRu": "Вы платите картой или наличными?"}, {"id": 26, "infinitive": "NASTAVLJATI", "rawInfinitive": "NASTAVLJATI", "verbClass": "A", "reflexive": "none", "jaPdf": "nastavljam", "oniPdf": "nastavljaju", "forms": {"ja": "nastavljam", "ti": "nastavljaš", "on": "nastavlja", "mi": "nastavljamo", "vi": "nastavljate", "oni": "nastavljaju"}, "ru": "продолжать", "exampleSr": "Nastavljamo lekciju posle pauze.", "exampleRu": "Мы продолжаем урок после перерыва."}, {"id": 27, "infinitive": "MENJATI (SE)", "rawInfinitive": "MENJATI (SE)*", "verbClass": "A", "reflexive": "optional", "jaPdf": "menjam (se)", "oniPdf": "menjaju (se)", "forms": {"ja": "menjam", "ti": "menjaš", "on": "menja", "mi": "menjamo", "vi": "menjate", "oni": "menjaju"}, "ru": "менять(ся)", "exampleSr": "Vreme se brzo menja.", "exampleRu": "Погода быстро меняется."}, {"id": 28, "infinitive": "VRAĆATI (SE)", "rawInfinitive": "VRAĆATI (SE)*", "verbClass": "A", "reflexive": "optional", "jaPdf": "vraćam (se)", "oniPdf": "vraćaju (se)", "forms": {"ja": "vraćam", "ti": "vraćaš", "on": "vraća", "mi": "vraćamo", "vi": "vraćate", "oni": "vraćaju"}, "ru": "возвращать(ся)", "exampleSr": "Vraćam se kući oko osam.", "exampleRu": "Я возвращаюсь домой около восьми."}, {"id": 29, "infinitive": "OBJAŠNJAVATI", "rawInfinitive": "OBJAŠNJAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "objašnjavam", "oniPdf": "objašnjavaju", "forms": {"ja": "objašnjavam", "ti": "objašnjavaš", "on": "objašnjava", "mi": "objašnjavamo", "vi": "objašnjavate", "oni": "objašnjavaju"}, "ru": "объяснять", "exampleSr": "Profesor strpljivo objašnjava gramatiku.", "exampleRu": "Преподаватель терпеливо объясняет грамматику."}, {"id": 30, "infinitive": "NADATI SE", "rawInfinitive": "NADATI SE*", "verbClass": "A", "reflexive": "required", "jaPdf": "nadam se", "oniPdf": "nadaju se", "forms": {"ja": "nadam", "ti": "nadaš", "on": "nada", "mi": "nadamo", "vi": "nadate", "oni": "nadaju"}, "ru": "надеяться", "exampleSr": "Nadam se da se uskoro vidimo.", "exampleRu": "Надеюсь, что мы скоро увидимся."}, {"id": 31, "infinitive": "PODRŽAVATI", "rawInfinitive": "PODRŽAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "podržavam", "oniPdf": "podržavaju", "forms": {"ja": "podržavam", "ti": "podržavaš", "on": "podržava", "mi": "podržavamo", "vi": "podržavate", "oni": "podržavaju"}, "ru": "поддерживать", "exampleSr": "Prijatelji me uvek podržavaju.", "exampleRu": "Друзья меня всегда поддерживают."}, {"id": 32, "infinitive": "POKRIVATI", "rawInfinitive": "POKRIVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "pokrivam", "oniPdf": "pokrivaju", "forms": {"ja": "pokrivam", "ti": "pokrivaš", "on": "pokriva", "mi": "pokrivamo", "vi": "pokrivate", "oni": "pokrivaju"}, "ru": "покрывать, прикрывать", "exampleSr": "Sneg pokriva krovove grada.", "exampleRu": "Снег покрывает крыши города."}, {"id": 33, "infinitive": "BIRATI", "rawInfinitive": "BIRATI", "verbClass": "A", "reflexive": "none", "jaPdf": "biram", "oniPdf": "biraju", "forms": {"ja": "biram", "ti": "biraš", "on": "bira", "mi": "biramo", "vi": "birate", "oni": "biraju"}, "ru": "выбирать", "exampleSr": "Biramo poklon za rođendan.", "exampleRu": "Мы выбираем подарок на день рождения."}, {"id": 34, "infinitive": "PRIČATI", "rawInfinitive": "PRIČATI", "verbClass": "A", "reflexive": "none", "jaPdf": "pričam", "oniPdf": "pričaju", "forms": {"ja": "pričam", "ti": "pričaš", "on": "priča", "mi": "pričamo", "vi": "pričate", "oni": "pričaju"}, "ru": "рассказывать, говорить", "exampleSr": "Već malo pričam srpski.", "exampleRu": "Я уже немного говорю по-сербски."}, {"id": 35, "infinitive": "RUČATI", "rawInfinitive": "RUČATI", "verbClass": "A", "reflexive": "none", "jaPdf": "ručam", "oniPdf": "ručaju", "forms": {"ja": "ručam", "ti": "ručaš", "on": "ruča", "mi": "ručamo", "vi": "ručate", "oni": "ručaju"}, "ru": "обедать", "exampleSr": "Obično ručamo u dva sata.", "exampleRu": "Обычно мы обедаем в два часа."}, {"id": 36, "infinitive": "VEČERATI", "rawInfinitive": "VEČERATI", "verbClass": "A", "reflexive": "none", "jaPdf": "večeram", "oniPdf": "večeraju", "forms": {"ja": "večeram", "ti": "večeraš", "on": "večera", "mi": "večeramo", "vi": "večerate", "oni": "večeraju"}, "ru": "ужинать", "exampleSr": "Gde večerate večeras?", "exampleRu": "Где вы сегодня ужинаете?"}, {"id": 37, "infinitive": "ODMARATI (SE)", "rawInfinitive": "ODMARATI (SE)*", "verbClass": "A", "reflexive": "optional", "jaPdf": "odmaram (se)", "oniPdf": "odmaraju (se)", "forms": {"ja": "odmaram", "ti": "odmaraš", "on": "odmara", "mi": "odmaramo", "vi": "odmarate", "oni": "odmaraju"}, "ru": "отдыхать", "exampleSr": "Vikendom se odmaramo van grada.", "exampleRu": "По выходным мы отдыхаем за городом."}, {"id": 38, "infinitive": "ZAVRŠAVATI", "rawInfinitive": "ZAVRŠAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "završavam", "oniPdf": "završavaju", "forms": {"ja": "završavam", "ti": "završavaš", "on": "završava", "mi": "završavamo", "vi": "završavate", "oni": "završavaju"}, "ru": "заканчивать", "exampleSr": "Završavam posao u pet.", "exampleRu": "Я заканчиваю работу в пять."}, {"id": 39, "infinitive": "SVIĐATI SE", "rawInfinitive": "SVIĐATI SE*", "verbClass": "A", "reflexive": "required", "jaPdf": "sviđam se", "oniPdf": "sviđaju se", "forms": {"ja": "sviđam", "ti": "sviđaš", "on": "sviđa", "mi": "sviđamo", "vi": "sviđate", "oni": "sviđaju"}, "ru": "нравиться", "exampleSr": "Mnogo mi se sviđa ovaj grad.", "exampleRu": "Мне очень нравится этот город."}, {"id": 40, "infinitive": "PEVATI", "rawInfinitive": "PEVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "pevam", "oniPdf": "pevaju", "forms": {"ja": "pevam", "ti": "pevaš", "on": "peva", "mi": "pevamo", "vi": "pevate", "oni": "pevaju"}, "ru": "петь", "exampleSr": "Oni rado pevaju stare pesme.", "exampleRu": "Они охотно поют старые песни."}, {"id": 41, "infinitive": "SEĆATI SE", "rawInfinitive": "SEĆATI SE*", "verbClass": "A", "reflexive": "required", "jaPdf": "sećam se", "oniPdf": "sećaju se", "forms": {"ja": "sećam", "ti": "sećaš", "on": "seća", "mi": "sećamo", "vi": "sećate", "oni": "sećaju"}, "ru": "помнить", "exampleSr": "Dobro se sećam našeg prvog susreta.", "exampleRu": "Я хорошо помню нашу первую встречу."}, {"id": 42, "infinitive": "MORATI", "rawInfinitive": "MORATI", "verbClass": "A", "reflexive": "none", "jaPdf": "moram", "oniPdf": "moraju", "forms": {"ja": "moram", "ti": "moraš", "on": "mora", "mi": "moramo", "vi": "morate", "oni": "moraju"}, "ru": "быть должным", "exampleSr": "Moram da krenem na vreme.", "exampleRu": "Я должен выйти вовремя."}, {"id": 43, "infinitive": "REŠAVATI", "rawInfinitive": "REŠAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "rešavam", "oniPdf": "rešavaju", "forms": {"ja": "rešavam", "ti": "rešavaš", "on": "rešava", "mi": "rešavamo", "vi": "rešavate", "oni": "rešavaju"}, "ru": "решать", "exampleSr": "Zajedno rešavamo svaki zadatak.", "exampleRu": "Мы вместе решаем каждую задачу."}, {"id": 44, "infinitive": "SPAVATI", "rawInfinitive": "SPAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "spavam", "oniPdf": "spavaju", "forms": {"ja": "spavam", "ti": "spavaš", "on": "spava", "mi": "spavamo", "vi": "spavate", "oni": "spavaju"}, "ru": "спать", "exampleSr": "Beba mirno spava.", "exampleRu": "Малыш спокойно спит."}, {"id": 45, "infinitive": "UZIMATI", "rawInfinitive": "UZIMATI", "verbClass": "A", "reflexive": "none", "jaPdf": "uzimam", "oniPdf": "uzimaju", "forms": {"ja": "uzimam", "ti": "uzimaš", "on": "uzima", "mi": "uzimamo", "vi": "uzimate", "oni": "uzimaju"}, "ru": "брать", "exampleSr": "Uzimam kafu za poneti.", "exampleRu": "Я беру кофе с собой."}, {"id": 46, "infinitive": "POKUŠAVATI", "rawInfinitive": "POKUŠAVATI", "verbClass": "A", "reflexive": "none", "jaPdf": "pokušavam", "oniPdf": "pokušavaju", "forms": {"ja": "pokušavam", "ti": "pokušavaš", "on": "pokušava", "mi": "pokušavamo", "vi": "pokušavate", "oni": "pokušavaju"}, "ru": "пытаться, пробовать", "exampleSr": "Pokušavam da govorim bez grešaka.", "exampleRu": "Я стараюсь говорить без ошибок."}, {"id": 47, "infinitive": "POKUŠATI", "rawInfinitive": "POKUŠATI", "verbClass": "A", "reflexive": "none", "jaPdf": "pokušam", "oniPdf": "pokušaju", "forms": {"ja": "pokušam", "ti": "pokušaš", "on": "pokuša", "mi": "pokušamo", "vi": "pokušate", "oni": "pokušaju"}, "ru": "попытаться, попробовать", "exampleSr": "Hajde da pokušamo još jednom.", "exampleRu": "Давай попробуем ещё раз."}, {"id": 48, "infinitive": "RADITI", "rawInfinitive": "RADITI", "verbClass": "I", "reflexive": "none", "jaPdf": "radim", "oniPdf": "rade", "forms": {"ja": "radim", "ti": "radiš", "on": "radi", "mi": "radimo", "vi": "radite", "oni": "rade"}, "ru": "работать, делать", "exampleSr": "Šta radiš ovog vikenda?", "exampleRu": "Что ты делаешь в эти выходные?"}, {"id": 49, "infinitive": "GOVORITI", "rawInfinitive": "GOVORITI", "verbClass": "I", "reflexive": "none", "jaPdf": "govorim", "oniPdf": "govore", "forms": {"ja": "govorim", "ti": "govoriš", "on": "govori", "mi": "govorimo", "vi": "govorite", "oni": "govore"}, "ru": "говорить", "exampleSr": "Da li govorite srpski?", "exampleRu": "Вы говорите по-сербски?"}, {"id": 50, "infinitive": "DOLAZITI", "rawInfinitive": "DOLAZITI", "verbClass": "I", "reflexive": "none", "jaPdf": "dolazim", "oniPdf": "dolaze", "forms": {"ja": "dolazim", "ti": "dolaziš", "on": "dolazi", "mi": "dolazimo", "vi": "dolazite", "oni": "dolaze"}, "ru": "приходить, приезжать, прибывать", "exampleSr": "Gosti dolaze za pola sata.", "exampleRu": "Гости приходят через полчаса."}, {"id": 51, "infinitive": "ULAZITI", "rawInfinitive": "ULAZITI", "verbClass": "I", "reflexive": "none", "jaPdf": "ulazim", "oniPdf": "ulaze", "forms": {"ja": "ulazim", "ti": "ulaziš", "on": "ulazi", "mi": "ulazimo", "vi": "ulazite", "oni": "ulaze"}, "ru": "входить", "exampleSr": "Ulazimo u zgradu sa dvorišne strane.", "exampleRu": "Мы входим в здание со стороны двора."}, {"id": 52, "infinitive": "IZLAZITI", "rawInfinitive": "IZLAZITI", "verbClass": "I", "reflexive": "none", "jaPdf": "izlazim", "oniPdf": "izlaze", "forms": {"ja": "izlazim", "ti": "izlaziš", "on": "izlazi", "mi": "izlazimo", "vi": "izlazite", "oni": "izlaze"}, "ru": "выходить", "exampleSr": "Izlazim iz kuće za pet minuta.", "exampleRu": "Я выхожу из дома через пять минут."}, {"id": 53, "infinitive": "UČITI", "rawInfinitive": "UČITI", "verbClass": "I", "reflexive": "none", "jaPdf": "učim", "oniPdf": "uče", "forms": {"ja": "učim", "ti": "učiš", "on": "uči", "mi": "učimo", "vi": "učite", "oni": "uče"}, "ru": "учить", "exampleSr": "Svaki dan učim nove glagole.", "exampleRu": "Каждый день я учу новые глаголы."}, {"id": 54, "infinitive": "MISLITI", "rawInfinitive": "MISLITI", "verbClass": "I", "reflexive": "none", "jaPdf": "mislim", "oniPdf": "misle", "forms": {"ja": "mislim", "ti": "misliš", "on": "misli", "mi": "mislimo", "vi": "mislite", "oni": "misle"}, "ru": "думать, мыслить", "exampleSr": "Mislim da je to odlična ideja.", "exampleRu": "Я думаю, что это отличная идея."}, {"id": 55, "infinitive": "TRAŽITI", "rawInfinitive": "TRAŽITI", "verbClass": "I", "reflexive": "none", "jaPdf": "tražim", "oniPdf": "traže", "forms": {"ja": "tražim", "ti": "tražiš", "on": "traži", "mi": "tražimo", "vi": "tražite", "oni": "traže"}, "ru": "искать, требовать, просить", "exampleSr": "Tražimo stan na Vračaru.", "exampleRu": "Мы ищем квартиру на Врачаре."}, {"id": 56, "infinitive": "KORISTITI", "rawInfinitive": "KORISTITI", "verbClass": "I", "reflexive": "none", "jaPdf": "koristim", "oniPdf": "koriste", "forms": {"ja": "koristim", "ti": "koristiš", "on": "koristi", "mi": "koristimo", "vi": "koristite", "oni": "koriste"}, "ru": "использовать, приносить пользу, служить", "exampleSr": "Koristim Serbka aplikaciju svaki dan.", "exampleRu": "Я использую приложение Serbka каждый день."}, {"id": 57, "infinitive": "KUPITI", "rawInfinitive": "KUPITI", "verbClass": "I", "reflexive": "none", "jaPdf": "kupim", "oniPdf": "kupe", "forms": {"ja": "kupim", "ti": "kupiš", "on": "kupi", "mi": "kupimo", "vi": "kupite", "oni": "kupe"}, "ru": "купить", "exampleSr": "Želim da kupim sveže voće.", "exampleRu": "Я хочу купить свежие фрукты."}, {"id": 58, "infinitive": "PROVODITI", "rawInfinitive": "PROVODITI", "verbClass": "I", "reflexive": "none", "jaPdf": "provodim", "oniPdf": "provode", "forms": {"ja": "provodim", "ti": "provodiš", "on": "provodi", "mi": "provodimo", "vi": "provodite", "oni": "provode"}, "ru": "проводить", "exampleSr": "Rado provodimo vreme sa prijateljima.", "exampleRu": "Мы с радостью проводим время с друзьями."}, {"id": 59, "infinitive": "ŠALITI SE", "rawInfinitive": "ŠALITI SE*", "verbClass": "I", "reflexive": "required", "jaPdf": "šalim se", "oniPdf": "šale se", "forms": {"ja": "šalim", "ti": "šališ", "on": "šali", "mi": "šalimo", "vi": "šalite", "oni": "šale"}, "ru": "шутить", "exampleSr": "Samo se šalim, ne brini!", "exampleRu": "Я просто шучу, не переживай!"}, {"id": 60, "infinitive": "DRUŽITI SE", "rawInfinitive": "DRUŽITI SE*", "verbClass": "I", "reflexive": "required", "jaPdf": "družim se", "oniPdf": "druže se", "forms": {"ja": "družim", "ti": "družiš", "on": "druži", "mi": "družimo", "vi": "družite", "oni": "druže"}, "ru": "общаться, дружить", "exampleSr": "Često se družimo u kafiću.", "exampleRu": "Мы часто общаемся в кафе."}, {"id": 61, "infinitive": "MOLITI", "rawInfinitive": "MOLITI", "verbClass": "I", "reflexive": "none", "jaPdf": "molim", "oniPdf": "mole", "forms": {"ja": "molim", "ti": "moliš", "on": "moli", "mi": "molimo", "vi": "molite", "oni": "mole"}, "ru": "просить", "exampleSr": "Molim vas za malo pažnje.", "exampleRu": "Прошу вас о небольшом внимании."}, {"id": 62, "infinitive": "STAVITI", "rawInfinitive": "STAVITI", "verbClass": "I", "reflexive": "none", "jaPdf": "stavim", "oniPdf": "stave", "forms": {"ja": "stavim", "ti": "staviš", "on": "stavi", "mi": "stavimo", "vi": "stavite", "oni": "stave"}, "ru": "поставить, положить", "exampleSr": "Stavi knjigu na policu.", "exampleRu": "Положи книгу на полку."}, {"id": 63, "infinitive": "ŽELETI", "rawInfinitive": "ŽELETI", "verbClass": "I", "reflexive": "none", "jaPdf": "želim", "oniPdf": "žele", "forms": {"ja": "želim", "ti": "želiš", "on": "želi", "mi": "želimo", "vi": "želite", "oni": "žele"}, "ru": "хотеть, желать", "exampleSr": "Želim ti prijatan dan!", "exampleRu": "Желаю тебе приятного дня!"}, {"id": 64, "infinitive": "VOLETI", "rawInfinitive": "VOLETI", "verbClass": "I", "reflexive": "none", "jaPdf": "volim", "oniPdf": "vole", "forms": {"ja": "volim", "ti": "voliš", "on": "voli", "mi": "volimo", "vi": "volite", "oni": "vole"}, "ru": "любить", "exampleSr": "Volimo srpsku kuhinju i gostoprimstvo.", "exampleRu": "Мы любим сербскую кухню и гостеприимство."}, {"id": 65, "infinitive": "VIDETI", "rawInfinitive": "VIDETI", "verbClass": "I", "reflexive": "none", "jaPdf": "vidim", "oniPdf": "vide", "forms": {"ja": "vidim", "ti": "vidiš", "on": "vidi", "mi": "vidimo", "vi": "vidite", "oni": "vide"}, "ru": "видеть", "exampleSr": "Vidimo se sutra u centru.", "exampleRu": "Увидимся завтра в центре."}, {"id": 66, "infinitive": "NALAZITI (SE)", "rawInfinitive": "NALAZITI (SE)*", "verbClass": "I", "reflexive": "optional", "jaPdf": "nalazim (se)", "oniPdf": "nalaze (se)", "forms": {"ja": "nalazim", "ti": "nalaziš", "on": "nalazi", "mi": "nalazimo", "vi": "nalazite", "oni": "nalaze"}, "ru": "находить(ся)", "exampleSr": "Gde se nalazi najbliža apoteka?", "exampleRu": "Где находится ближайшая аптека?"}, {"id": 67, "infinitive": "OSTAVITI", "rawInfinitive": "OSTAVITI", "verbClass": "I", "reflexive": "none", "jaPdf": "ostavim", "oniPdf": "ostave", "forms": {"ja": "ostavim", "ti": "ostaviš", "on": "ostavi", "mi": "ostavimo", "vi": "ostavite", "oni": "ostave"}, "ru": "оставить", "exampleSr": "Možeš da ostaviš jaknu ovde.", "exampleRu": "Можешь оставить куртку здесь."}, {"id": 68, "infinitive": "ZVONITI", "rawInfinitive": "ZVONITI", "verbClass": "I", "reflexive": "none", "jaPdf": "zvonim", "oniPdf": "zvone", "forms": {"ja": "zvonim", "ti": "zvoniš", "on": "zvoni", "mi": "zvonimo", "vi": "zvonite", "oni": "zvone"}, "ru": "звонить", "exampleSr": "Telefon zvoni već drugi put.", "exampleRu": "Телефон звонит уже второй раз."}, {"id": 69, "infinitive": "DOZVOLITI", "rawInfinitive": "DOZVOLITI", "verbClass": "I", "reflexive": "none", "jaPdf": "dozvolim", "oniPdf": "dozvole", "forms": {"ja": "dozvolim", "ti": "dozvoliš", "on": "dozvoli", "mi": "dozvolimo", "vi": "dozvolite", "oni": "dozvole"}, "ru": "разрешить, позволить", "exampleSr": "Dozvolite mi da vam pomognem.", "exampleRu": "Позвольте мне вам помочь."}, {"id": 70, "infinitive": "TRUDITI SE", "rawInfinitive": "TRUDITI SE*", "verbClass": "I", "reflexive": "required", "jaPdf": "trudim se", "oniPdf": "trude se", "forms": {"ja": "trudim", "ti": "trudiš", "on": "trudi", "mi": "trudimo", "vi": "trudite", "oni": "trude"}, "ru": "стараться", "exampleSr": "Trudim se da razumem svaki detalj.", "exampleRu": "Я стараюсь понять каждую деталь."}, {"id": 71, "infinitive": "PLATITI", "rawInfinitive": "PLATITI", "verbClass": "I", "reflexive": "none", "jaPdf": "platim", "oniPdf": "plate", "forms": {"ja": "platim", "ti": "platiš", "on": "plati", "mi": "platimo", "vi": "platite", "oni": "plate"}, "ru": "заплатить, выплатить", "exampleSr": "Hoćeš li da platiš račun?", "exampleRu": "Ты оплатишь счёт?"}, {"id": 72, "infinitive": "NASTAVITI", "rawInfinitive": "NASTAVITI", "verbClass": "I", "reflexive": "none", "jaPdf": "nastavim", "oniPdf": "nastave", "forms": {"ja": "nastavim", "ti": "nastaviš", "on": "nastavi", "mi": "nastavimo", "vi": "nastavite", "oni": "nastave"}, "ru": "продолжить", "exampleSr": "Hajde da nastavimo razgovor.", "exampleRu": "Давай продолжим разговор."}, {"id": 73, "infinitive": "ZNAČITI", "rawInfinitive": "ZNAČITI", "verbClass": "I", "reflexive": "none", "jaPdf": "značim", "oniPdf": "znače", "forms": {"ja": "značim", "ti": "značiš", "on": "znači", "mi": "značimo", "vi": "značite", "oni": "znače"}, "ru": "значить", "exampleSr": "Šta znači ova reč u kontekstu?", "exampleRu": "Что значит это слово в контексте?"}, {"id": 74, "infinitive": "VRATITI (SE)", "rawInfinitive": "VRATITI (SE)*", "verbClass": "I", "reflexive": "optional", "jaPdf": "vratim (se)", "oniPdf": "vrate (se)", "forms": {"ja": "vratim", "ti": "vratiš", "on": "vrati", "mi": "vratimo", "vi": "vratite", "oni": "vrate"}, "ru": "вернуть(ся)", "exampleSr": "Brzo se vratim, sačekaj me.", "exampleRu": "Я быстро вернусь, подожди меня."}, {"id": 75, "infinitive": "OBJASNITI", "rawInfinitive": "OBJASNITI", "verbClass": "I", "reflexive": "none", "jaPdf": "objasnim", "oniPdf": "objasne", "forms": {"ja": "objasnim", "ti": "objasniš", "on": "objasni", "mi": "objasnimo", "vi": "objasnite", "oni": "objasne"}, "ru": "объяснить", "exampleSr": "Možeš li da mi objasniš ovo pravilo?", "exampleRu": "Можешь объяснить мне это правило?"}, {"id": 76, "infinitive": "TRČATI", "rawInfinitive": "TRČATI", "verbClass": "I", "reflexive": "none", "jaPdf": "trčim", "oniPdf": "trče", "forms": {"ja": "trčim", "ti": "trčiš", "on": "trči", "mi": "trčimo", "vi": "trčite", "oni": "trče"}, "ru": "бегать", "exampleSr": "Ujutru trčimo pored Dunava.", "exampleRu": "По утрам мы бегаем вдоль Дуная."}, {"id": 77, "infinitive": "BEŽATI", "rawInfinitive": "BEŽATI", "verbClass": "I", "reflexive": "none", "jaPdf": "bežim", "oniPdf": "beže", "forms": {"ja": "bežim", "ti": "bežiš", "on": "beži", "mi": "bežimo", "vi": "bežite", "oni": "beže"}, "ru": "убегать", "exampleSr": "Vreme brzo beži kada je zanimljivo.", "exampleRu": "Время быстро бежит, когда интересно."}, {"id": 78, "infinitive": "ŽIVETI", "rawInfinitive": "ŽIVETI", "verbClass": "I", "reflexive": "none", "jaPdf": "živim", "oniPdf": "žive", "forms": {"ja": "živim", "ti": "živiš", "on": "živi", "mi": "živimo", "vi": "živite", "oni": "žive"}, "ru": "жить", "exampleSr": "Živim i radim u Beogradu.", "exampleRu": "Я живу и работаю в Белграде."}, {"id": 79, "infinitive": "DONOSITI", "rawInfinitive": "DONOSITI", "verbClass": "I", "reflexive": "none", "jaPdf": "donosim", "oniPdf": "donose", "forms": {"ja": "donosim", "ti": "donosiš", "on": "donosi", "mi": "donosimo", "vi": "donosite", "oni": "donose"}, "ru": "приносить", "exampleSr": "Svaki dan donosi nešto novo.", "exampleRu": "Каждый день приносит что-то новое."}, {"id": 80, "infinitive": "SEDETI", "rawInfinitive": "SEDETI", "verbClass": "I", "reflexive": "none", "jaPdf": "sedim", "oniPdf": "sede", "forms": {"ja": "sedim", "ti": "sediš", "on": "sedi", "mi": "sedimo", "vi": "sedite", "oni": "sede"}, "ru": "сидеть", "exampleSr": "Sedimo u bašti i pijemo kafu.", "exampleRu": "Мы сидим на террасе и пьём кофе."}, {"id": 81, "infinitive": "LEŽATI", "rawInfinitive": "LEŽATI", "verbClass": "I", "reflexive": "none", "jaPdf": "ležim", "oniPdf": "leže", "forms": {"ja": "ležim", "ti": "ležiš", "on": "leži", "mi": "ležimo", "vi": "ležite", "oni": "leže"}, "ru": "лежать", "exampleSr": "Mačka leži na suncu.", "exampleRu": "Кошка лежит на солнце."}, {"id": 82, "infinitive": "STAJATI", "rawInfinitive": "STAJATI", "verbClass": "I", "reflexive": "none", "jaPdf": "stojim", "oniPdf": "stoje", "forms": {"ja": "stojim", "ti": "stojiš", "on": "stoji", "mi": "stojimo", "vi": "stojite", "oni": "stoje"}, "ru": "стоять", "exampleSr": "Zašto stojiš, slobodno sedi.", "exampleRu": "Почему ты стоишь, спокойно садись."}, {"id": 83, "infinitive": "IZGUBITI", "rawInfinitive": "IZGUBITI", "verbClass": "I", "reflexive": "none", "jaPdf": "izgubim", "oniPdf": "izgube", "forms": {"ja": "izgubim", "ti": "izgubiš", "on": "izgubi", "mi": "izgubimo", "vi": "izgubite", "oni": "izgube"}, "ru": "потерять", "exampleSr": "Pazi da ne izgubiš kartu.", "exampleRu": "Смотри не потеряй билет."}, {"id": 84, "infinitive": "PRATITI", "rawInfinitive": "PRATITI", "verbClass": "I", "reflexive": "none", "jaPdf": "pratim", "oniPdf": "prate", "forms": {"ja": "pratim", "ti": "pratiš", "on": "prati", "mi": "pratimo", "vi": "pratite", "oni": "prate"}, "ru": "следовать, следить, сопровождать", "exampleSr": "Pratim titlove dok gledam seriju.", "exampleRu": "Я слежу за субтитрами, когда смотрю сериал."}, {"id": 85, "infinitive": "TROŠITI", "rawInfinitive": "TROŠITI", "verbClass": "I", "reflexive": "none", "jaPdf": "trošim", "oniPdf": "troše", "forms": {"ja": "trošim", "ti": "trošiš", "on": "troši", "mi": "trošimo", "vi": "trošite", "oni": "troše"}, "ru": "тратить", "exampleSr": "Ne trošimo vreme na prebacivanje između prozora.", "exampleRu": "Мы не тратим время на переключение между окнами."}, {"id": 86, "infinitive": "NUDITI", "rawInfinitive": "NUDITI", "verbClass": "I", "reflexive": "none", "jaPdf": "nudim", "oniPdf": "nude", "forms": {"ja": "nudim", "ti": "nudiš", "on": "nudi", "mi": "nudimo", "vi": "nudite", "oni": "nude"}, "ru": "предлагать", "exampleSr": "Restoran nudi domaća jela.", "exampleRu": "Ресторан предлагает домашние блюда."}, {"id": 87, "infinitive": "PONUDITI", "rawInfinitive": "PONUDITI", "verbClass": "I", "reflexive": "none", "jaPdf": "ponudim", "oniPdf": "ponude", "forms": {"ja": "ponudim", "ti": "ponudiš", "on": "ponudi", "mi": "ponudimo", "vi": "ponudite", "oni": "ponude"}, "ru": "предложить", "exampleSr": "Želim da vam ponudim čaj ili kafu.", "exampleRu": "Я хочу предложить вам чай или кофе."}, {"id": 88, "infinitive": "PAMTITI", "rawInfinitive": "PAMTITI", "verbClass": "I", "reflexive": "none", "jaPdf": "pamtim", "oniPdf": "pamte", "forms": {"ja": "pamtim", "ti": "pamtiš", "on": "pamti", "mi": "pamtimo", "vi": "pamtite", "oni": "pamte"}, "ru": "помнить, запоминать", "exampleSr": "Lakše pamtim reči kroz kontekst.", "exampleRu": "Я легче запоминаю слова через контекст."}, {"id": 89, "infinitive": "GRADITI", "rawInfinitive": "GRADITI", "verbClass": "I", "reflexive": "none", "jaPdf": "gradim", "oniPdf": "grade", "forms": {"ja": "gradim", "ti": "gradiš", "on": "gradi", "mi": "gradimo", "vi": "gradite", "oni": "grade"}, "ru": "строить", "exampleSr": "Ovde grade novi most.", "exampleRu": "Здесь строят новый мост."}, {"id": 90, "infinitive": "REŠITI", "rawInfinitive": "REŠITI", "verbClass": "I", "reflexive": "none", "jaPdf": "rešim", "oniPdf": "reše", "forms": {"ja": "rešim", "ti": "rešiš", "on": "reši", "mi": "rešimo", "vi": "rešite", "oni": "reše"}, "ru": "решить", "exampleSr": "Sigurno ćemo rešiti taj problem.", "exampleRu": "Мы обязательно решим эту проблему."}, {"id": 91, "infinitive": "ODLUČITI", "rawInfinitive": "ODLUČITI", "verbClass": "I", "reflexive": "none", "jaPdf": "odlučim", "oniPdf": "odluče", "forms": {"ja": "odlučim", "ti": "odlučiš", "on": "odluči", "mi": "odlučimo", "vi": "odlučite", "oni": "odluče"}, "ru": "решить, принять решение", "exampleSr": "Treba da odlučimo gde idemo.", "exampleRu": "Нам нужно решить, куда мы идём."}, {"id": 92, "infinitive": "PROIZVODITI", "rawInfinitive": "PROIZVODITI", "verbClass": "I", "reflexive": "none", "jaPdf": "proizvodim", "oniPdf": "proizvode", "forms": {"ja": "proizvodim", "ti": "proizvodiš", "on": "proizvodi", "mi": "proizvodimo", "vi": "proizvodite", "oni": "proizvode"}, "ru": "производить", "exampleSr": "Ova fabrika proizvodi nameštaj.", "exampleRu": "Эта фабрика производит мебель."}, {"id": 93, "infinitive": "IĆI", "rawInfinitive": "IĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "idem", "oniPdf": "idu", "forms": {"ja": "idem", "ti": "ideš", "on": "ide", "mi": "idemo", "vi": "idete", "oni": "idu"}, "ru": "идти, ехать, ходить, ездить", "exampleSr": "Danas idem peške na posao.", "exampleRu": "Сегодня я иду пешком на работу."}, {"id": 94, "infinitive": "DOĆI", "rawInfinitive": "DOĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "dođem", "oniPdf": "dođu", "forms": {"ja": "dođem", "ti": "dođeš", "on": "dođe", "mi": "dođemo", "vi": "dođete", "oni": "dođu"}, "ru": "прийти, прибыть, приехать, наступить", "exampleSr": "Javi se kad dođeš kući.", "exampleRu": "Напиши, когда придёшь домой."}, {"id": 95, "infinitive": "OTIĆI", "rawInfinitive": "OTIĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "odem", "oniPdf": "odu", "forms": {"ja": "odem", "ti": "odeš", "on": "ode", "mi": "odemo", "vi": "odete", "oni": "odu"}, "ru": "уйти, отправиться, уехать, отойти", "exampleSr": "Moram da odem do prodavnice.", "exampleRu": "Мне нужно сходить в магазин."}, {"id": 96, "infinitive": "NAĆI", "rawInfinitive": "NAĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "nađem", "oniPdf": "nađu", "forms": {"ja": "nađem", "ti": "nađeš", "on": "nađe", "mi": "nađemo", "vi": "nađete", "oni": "nađu"}, "ru": "найти", "exampleSr": "Lako nađem prevod svake reči.", "exampleRu": "Я легко нахожу перевод каждого слова."}, {"id": 97, "infinitive": "SNAĆI SE", "rawInfinitive": "SNAĆI SE*", "verbClass": "E", "reflexive": "required", "jaPdf": "snađem se", "oniPdf": "snađu se", "forms": {"ja": "snađem", "ti": "snađeš", "on": "snađe", "mi": "snađemo", "vi": "snađete", "oni": "snađu"}, "ru": "сориентироваться, приспособиться", "exampleSr": "Brzo se snađeš u novom gradu.", "exampleRu": "Ты быстро ориентируешься в новом городе."}, {"id": 98, "infinitive": "JESTI", "rawInfinitive": "JESTI", "verbClass": "E", "reflexive": "none", "jaPdf": "jedem", "oniPdf": "jedu", "forms": {"ja": "jedem", "ti": "jedeš", "on": "jede", "mi": "jedemo", "vi": "jedete", "oni": "jedu"}, "ru": "есть (кушать)", "exampleSr": "Za doručak obično jedem burek.", "exampleRu": "На завтрак я обычно ем бурек."}, {"id": 99, "infinitive": "PROVESTI (SE)", "rawInfinitive": "PROVESTI (SE)*", "verbClass": "E", "reflexive": "optional", "jaPdf": "provedem (se)", "oniPdf": "provedu (se)", "forms": {"ja": "provedem", "ti": "provedeš", "on": "provede", "mi": "provedemo", "vi": "provedete", "oni": "provedu"}, "ru": "провести / развлечься, хорошо провести время", "exampleSr": "Lepo se provedemo svaki put.", "exampleRu": "Мы отлично проводим время каждый раз."}, {"id": 100, "infinitive": "SRESTI (SE)", "rawInfinitive": "SRESTI (SE)*", "verbClass": "E", "reflexive": "optional", "jaPdf": "sretnem", "oniPdf": "sretnu", "forms": {"ja": "sretnem", "ti": "sretneš", "on": "sretne", "mi": "sretnemo", "vi": "sretnete", "oni": "sretnu"}, "ru": "встретить(ся)", "exampleSr": "Često sretnem komšiju ujutru.", "exampleRu": "Я часто встречаю соседа по утрам."}, {"id": 101, "infinitive": "SESTI", "rawInfinitive": "SESTI", "verbClass": "E", "reflexive": "none", "jaPdf": "sednem", "oniPdf": "sednu", "forms": {"ja": "sednem", "ti": "sedneš", "on": "sedne", "mi": "sednemo", "vi": "sednete", "oni": "sednu"}, "ru": "сесть", "exampleSr": "Hajde da sednemo u ovaj kafić.", "exampleRu": "Давай сядем в этом кафе."}, {"id": 102, "infinitive": "POMOĆI", "rawInfinitive": "POMOĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "pomognem", "oniPdf": "pomognu", "forms": {"ja": "pomognem", "ti": "pomogneš", "on": "pomogne", "mi": "pomognemo", "vi": "pomognete", "oni": "pomognu"}, "ru": "помочь", "exampleSr": "Drago mi je ako mogu da pomognem.", "exampleRu": "Я рад, если могу помочь."}, {"id": 103, "infinitive": "STIĆI", "rawInfinitive": "STIĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "stignem", "oniPdf": "stignu", "forms": {"ja": "stignem", "ti": "stigneš", "on": "stigne", "mi": "stignemo", "vi": "stignete", "oni": "stignu"}, "ru": "прибыть, приехать, достичь, успеть", "exampleSr": "Kada stigneš u novi grad, sve je zanimljivo.", "exampleRu": "Когда приезжаешь в новый город, всё интересно."}, {"id": 104, "infinitive": "PODIĆI", "rawInfinitive": "PODIĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "podignem", "oniPdf": "podignu", "forms": {"ja": "podignem", "ti": "podigneš", "on": "podigne", "mi": "podignemo", "vi": "podignete", "oni": "podignu"}, "ru": "поднять, вырастить, воспитать, снять (деньги)", "exampleSr": "Treba da podignem novac sa bankomata.", "exampleRu": "Мне нужно снять деньги в банкомате."}, {"id": 105, "infinitive": "PUTOVATI", "rawInfinitive": "PUTOVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "putujem", "oniPdf": "putuju", "forms": {"ja": "putujem", "ti": "putuješ", "on": "putuje", "mi": "putujemo", "vi": "putujete", "oni": "putuju"}, "ru": "ехать, путешествовать, быть в пути", "exampleSr": "Volimo da putujemo po Srbiji.", "exampleRu": "Мы любим путешествовать по Сербии."}, {"id": 106, "infinitive": "KUPOVATI", "rawInfinitive": "KUPOVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "kupujem", "oniPdf": "kupuju", "forms": {"ja": "kupujem", "ti": "kupuješ", "on": "kupuje", "mi": "kupujemo", "vi": "kupujete", "oni": "kupuju"}, "ru": "покупать", "exampleSr": "Sveže povrće kupujem na pijaci.", "exampleRu": "Свежие овощи я покупаю на рынке."}, {"id": 107, "infinitive": "DORUČKOVATI", "rawInfinitive": "DORUČKOVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "doručkujem", "oniPdf": "doručkuju", "forms": {"ja": "doručkujem", "ti": "doručkuješ", "on": "doručkuje", "mi": "doručkujemo", "vi": "doručkujete", "oni": "doručkuju"}, "ru": "завтракать", "exampleSr": "Ujutru doručkujem kod kuće.", "exampleRu": "Утром я завтракаю дома."}, {"id": 108, "infinitive": "REAGOVATI", "rawInfinitive": "REAGOVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "reagujem", "oniPdf": "reaguju", "forms": {"ja": "reagujem", "ti": "reaguješ", "on": "reaguje", "mi": "reagujemo", "vi": "reagujete", "oni": "reaguju"}, "ru": "реагировать", "exampleSr": "On uvek mirno reaguje.", "exampleRu": "Он всегда спокойно реагирует."}, {"id": 109, "infinitive": "POKAZIVATI", "rawInfinitive": "POKAZIVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "pokazujem", "oniPdf": "pokazuju", "forms": {"ja": "pokazujem", "ti": "pokazuješ", "on": "pokazuje", "mi": "pokazujemo", "vi": "pokazujete", "oni": "pokazuju"}, "ru": "показывать", "exampleSr": "Vodič pokazuje stare ulice.", "exampleRu": "Гид показывает старые улицы."}, {"id": 110, "infinitive": "OČEKIVATI", "rawInfinitive": "OČEKIVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "očekujem", "oniPdf": "očekuju", "forms": {"ja": "očekujem", "ti": "očekuješ", "on": "očekuje", "mi": "očekujemo", "vi": "očekujete", "oni": "očekuju"}, "ru": "ожидать", "exampleSr": "Očekujemo lepo vreme za vikend.", "exampleRu": "Мы ожидаем хорошую погоду на выходных."}, {"id": 111, "infinitive": "IZNAJMLJIVATI", "rawInfinitive": "IZNAJMLJIVATI", "verbClass": "E", "reflexive": "none", "jaPdf": "iznajmljujem", "oniPdf": "iznajmljuju", "forms": {"ja": "iznajmljujem", "ti": "iznajmljuješ", "on": "iznajmljuje", "mi": "iznajmljujemo", "vi": "iznajmljujete", "oni": "iznajmljuju"}, "ru": "сдавать/брать в аренду", "exampleSr": "Oni iznajmljuju stan u Novom Sadu.", "exampleRu": "Они снимают квартиру в Нови-Саде."}, {"id": 112, "infinitive": "POZNAVATI (SE)", "rawInfinitive": "POZNAVATI (SE)*", "verbClass": "E", "reflexive": "optional", "jaPdf": "poznajem (se)", "oniPdf": "poznaju (se)", "forms": {"ja": "poznajem", "ti": "poznaješ", "on": "poznaje", "mi": "poznajemo", "vi": "poznajete", "oni": "poznaju"}, "ru": "знать, узнавать (знать друг друга)", "exampleSr": "Dobro poznajem ovaj kraj.", "exampleRu": "Я хорошо знаю этот район."}, {"id": 113, "infinitive": "BRINUTI (SE)", "rawInfinitive": "BRINUTI (SE)*", "verbClass": "E", "reflexive": "optional", "jaPdf": "brinem (se)", "oniPdf": "brinu (se)", "forms": {"ja": "brinem", "ti": "brineš", "on": "brine", "mi": "brinemo", "vi": "brinete", "oni": "brinu"}, "ru": "заботиться, беспокоиться", "exampleSr": "Ma daj, ne brini!", "exampleRu": "Да брось, не переживай!"}, {"id": 114, "infinitive": "ČUTI", "rawInfinitive": "ČUTI", "verbClass": "E", "reflexive": "none", "jaPdf": "čujem", "oniPdf": "čuju", "forms": {"ja": "čujem", "ti": "čuješ", "on": "čuje", "mi": "čujemo", "vi": "čujete", "oni": "čuju"}, "ru": "слышать, услышать", "exampleSr": "Da li me dobro čuješ?", "exampleRu": "Ты меня хорошо слышишь?"}, {"id": 115, "infinitive": "OBUĆI", "rawInfinitive": "OBUĆI", "verbClass": "E", "reflexive": "none", "jaPdf": "obučem", "oniPdf": "obuku", "forms": {"ja": "obučem", "ti": "obučeš", "on": "obuče", "mi": "obučemo", "vi": "obučete", "oni": "obuku"}, "ru": "надеть / одеть (кого-то)", "exampleSr": "Obuci toplu jaknu, hladno je.", "exampleRu": "Надень тёплую куртку, холодно."}, {"id": 116, "infinitive": "PISATI", "rawInfinitive": "PISATI", "verbClass": "E", "reflexive": "none", "jaPdf": "pišem", "oniPdf": "pišu", "forms": {"ja": "pišem", "ti": "pišeš", "on": "piše", "mi": "pišemo", "vi": "pišete", "oni": "pišu"}, "ru": "писать", "exampleSr": "Pišem poruku kolegama na srpskom.", "exampleRu": "Я пишу сообщение коллегам на сербском."}, {"id": 117, "infinitive": "PLAKATI", "rawInfinitive": "PLAKATI", "verbClass": "E", "reflexive": "none", "jaPdf": "plačem", "oniPdf": "plaču", "forms": {"ja": "plačem", "ti": "plačeš", "on": "plače", "mi": "plačemo", "vi": "plačete", "oni": "plaču"}, "ru": "плакать", "exampleSr": "Nemoj da plačeš, sve će biti u redu.", "exampleRu": "Не плачь, всё будет в порядке."}, {"id": 118, "infinitive": "DONETI", "rawInfinitive": "DONETI", "verbClass": "E", "reflexive": "none", "jaPdf": "donesem", "oniPdf": "donesu", "forms": {"ja": "donesem", "ti": "doneseš", "on": "donese", "mi": "donesemo", "vi": "donesete", "oni": "donesu"}, "ru": "принести, привезти, доставить, принять (решение)", "exampleSr": "Konobar će brzo doneti meni.", "exampleRu": "Официант быстро принесёт меню."}, {"id": 119, "infinitive": "PONETI", "rawInfinitive": "PONETI", "verbClass": "E", "reflexive": "none", "jaPdf": "ponesem", "oniPdf": "ponesu", "forms": {"ja": "ponesem", "ti": "poneseš", "on": "ponese", "mi": "ponesemo", "vi": "ponesete", "oni": "ponesu"}, "ru": "понести, взять с собой, захватить", "exampleSr": "Ponesi kišobran za svaki slučaj.", "exampleRu": "Возьми с собой зонт на всякий случай."}, {"id": 120, "infinitive": "UZETI", "rawInfinitive": "UZETI", "verbClass": "E", "reflexive": "none", "jaPdf": "uzmem", "oniPdf": "uzmu", "forms": {"ja": "uzmem", "ti": "uzmeš", "on": "uzme", "mi": "uzmemo", "vi": "uzmete", "oni": "uzmu"}, "ru": "взять, забрать", "exampleSr": "Mogu li da uzmem jednu jabuku?", "exampleRu": "Могу я взять одно яблоко?"}, {"id": 121, "infinitive": "RAZUMETI", "rawInfinitive": "RAZUMETI", "verbClass": "E", "reflexive": "none", "jaPdf": "razumem", "oniPdf": "razumeju", "forms": {"ja": "razumem", "ti": "razumeš", "on": "razume", "mi": "razumemo", "vi": "razumete", "oni": "razumeju"}, "ru": "понять, понимать", "exampleSr": "Vremenom ćeš bolje razumeti kako sve funkcioniše.", "exampleRu": "Со временем ты лучше поймёшь, как всё устроено."}, {"id": 122, "infinitive": "USPETI", "rawInfinitive": "USPETI", "verbClass": "E", "reflexive": "none", "jaPdf": "uspem", "oniPdf": "uspeju", "forms": {"ja": "uspem", "ti": "uspeš", "on": "uspe", "mi": "uspemo", "vi": "uspete", "oni": "uspeju"}, "ru": "удаться, получиться, преуспеть", "exampleSr": "Sigurno ćeš uspeti da naučiš sve glagole.", "exampleRu": "У тебя точно получится выучить все глаголы."}, {"id": 123, "infinitive": "PITI", "rawInfinitive": "PITI", "verbClass": "E", "reflexive": "none", "jaPdf": "pijem", "oniPdf": "piju", "forms": {"ja": "pijem", "ti": "piješ", "on": "pije", "mi": "pijemo", "vi": "pijete", "oni": "piju"}, "ru": "пить", "exampleSr": "Ujutru pijem domaću kafu.", "exampleRu": "Утром я пью домашний кофе."}, {"id": 124, "infinitive": "NAVIKNUTI", "rawInfinitive": "NAVIKNUTI", "verbClass": "E", "reflexive": "none", "jaPdf": "naviknem", "oniPdf": "naviknu", "forms": {"ja": "naviknem", "ti": "navikneš", "on": "navikne", "mi": "naviknemo", "vi": "naviknete", "oni": "naviknu"}, "ru": "привыкнуть, приучить", "exampleSr": "Brzo se navikneš na ritam Beograda.", "exampleRu": "Быстро привыкаешь к ритму Белграда."}, {"id": 125, "infinitive": "POMAGATI", "rawInfinitive": "POMAGATI", "verbClass": "E", "reflexive": "none", "jaPdf": "pomažem", "oniPdf": "pomažu", "forms": {"ja": "pomažem", "ti": "pomažeš", "on": "pomaže", "mi": "pomažemo", "vi": "pomažete", "oni": "pomažu"}, "ru": "помогать", "exampleSr": "Serbka pomaže da čitaš bez barijere.", "exampleRu": "Serbka помогает читать без барьера."}, {"id": 126, "infinitive": "KAZATI", "rawInfinitive": "KAZATI", "verbClass": "E", "reflexive": "none", "jaPdf": "kažem", "oniPdf": "kažu", "forms": {"ja": "kažem", "ti": "kažeš", "on": "kaže", "mi": "kažemo", "vi": "kažete", "oni": "kažu"}, "ru": "сказать, говорить", "exampleSr": "Kako da kažem ovo prirodno na srpskom?", "exampleRu": "Как сказать это естественно по-сербски?"}, {"id": 127, "infinitive": "ZVATI (SE)", "rawInfinitive": "ZVATI (SE)*", "verbClass": "E", "reflexive": "optional", "jaPdf": "zovem (se)", "oniPdf": "zovu (se)", "forms": {"ja": "zovem", "ti": "zoveš", "on": "zove", "mi": "zovemo", "vi": "zovete", "oni": "zovu"}, "ru": "звать, приглашать, называть(ся)", "exampleSr": "Zovem se Jelena, a kako se ti zoveš?", "exampleRu": "Меня зовут Елена, а как тебя зовут?"}, {"id": 128, "infinitive": "SLATI", "rawInfinitive": "SLATI", "verbClass": "E", "reflexive": "none", "jaPdf": "šaljem", "oniPdf": "šalju", "forms": {"ja": "šaljem", "ti": "šalješ", "on": "šalje", "mi": "šaljemo", "vi": "šaljete", "oni": "šalju"}, "ru": "отправлять, посылать, слать", "exampleSr": "Šaljem ti dokument na mejl.", "exampleRu": "Я отправляю тебе документ на почту."}, {"id": 129, "infinitive": "PRATI", "rawInfinitive": "PRATI", "verbClass": "E", "reflexive": "none", "jaPdf": "perem", "oniPdf": "peru", "forms": {"ja": "perem", "ti": "pereš", "on": "pere", "mi": "peremo", "vi": "perete", "oni": "peru"}, "ru": "мыть, промывать, стирать (бельё)", "exampleSr": "Subotom peremo veš.", "exampleRu": "По субботам мы стираем бельё."}];
+
+    const PRONOUN_META = [
+      { key: 'ja', labelSr: 'ja', labelRu: 'я (1 л. ед. ч.)' },
+      { key: 'ti', labelSr: 'ti', labelRu: 'ты (2 л. ед. ч.)' },
+      { key: 'on', labelSr: 'on / ona / ono', labelRu: 'он / она / оно (3 л. ед. ч.)' },
+      { key: 'mi', labelSr: 'mi', labelRu: 'мы (1 л. мн. ч.)' },
+      { key: 'vi', labelSr: 'vi', labelRu: 'вы (2 л. мн. ч.)' },
+      { key: 'oni', labelSr: 'oni / one / ona', labelRu: 'они (3 л. мн. ч.)' }
+    ];
+
+    // Safe localStorage wrapper
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem('serbka_verbs_progress_v1');
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return { masteredIds: [], mistakeIds: [], streak: 0, totalCorrect: 0, totalAnswered: 0 };
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('serbka_verbs_progress_v1', JSON.stringify(appState.progress));
+      } catch (e) {}
+    }
+
+    const appState = {
+      activeTab: 'learn', // 'home' | 'learn' | 'app' | 'roadmap'
+      learnMode: 'write', // 'write' | 'quiz' | 'flash' | 'table'
+      classFilter: 'ALL', // 'ALL' | 'A' | 'I' | 'E' | 'SE' | 'MISTAKES'
+      personFilter: 'ALL', // 'ALL' | 'PDF_CORE' | 'ja' | 'ti' | 'on' | 'mi' | 'vi' | 'oni'
+      searchQuery: '',
+      currentWriteVerb: null,
+      currentWritePerson: 'ja',
+      sidebarRevealed: false,
+      currentQuizVerb: null,
+      currentQuizPerson: 'oni',
+      quizAnswered: false,
+      flashIndex: 0,
+      expandedTableVerbId: null,
+      progress: loadSavedState()
+    };
+
+    // Normalize Serbian diacritics for helpful near-match feedback
+    function stripDiacritics(str) {
+      return str
+        .replace(/č|ć/g, 'c')
+        .replace(/ž/g, 'z')
+        .replace(/š/g, 's')
+        .replace(/đ/g, 'dj');
+    }
+
+    function getFilteredVerbs() {
+      return VERBS_DATA.filter(v => {
+        if (appState.classFilter === 'A' && v.verbClass !== 'A') return false;
+        if (appState.classFilter === 'I' && v.verbClass !== 'I') return false;
+        if (appState.classFilter === 'E' && v.verbClass !== 'E') return false;
+        if (appState.classFilter === 'SE' && v.reflexive === 'none') return false;
+        if (appState.classFilter === 'MISTAKES' && !appState.progress.mistakeIds.includes(v.id)) return false;
+        if (appState.searchQuery.trim() !== '') {
+          const q = appState.searchQuery.trim().toLowerCase();
+          const qPlain = stripDiacritics(q);
+          const infLower = v.infinitive.toLowerCase();
+          const ruLower = v.ru.toLowerCase();
+          const jaLower = v.forms.ja.toLowerCase();
+          const oniLower = v.forms.oni.toLowerCase();
+          if (
+            !infLower.includes(q) &&
+            !stripDiacritics(infLower).includes(qPlain) &&
+            !ruLower.includes(q) &&
+            !jaLower.includes(q) &&
+            !oniLower.includes(q)
+          ) {
+            return false;
+          }
+        }
+        return true;
+      });
+    }
+
+    function getActivePersonPool() {
+      if (appState.personFilter === 'ALL') return ['ja', 'ti', 'on', 'mi', 'vi', 'oni'];
+      if (appState.personFilter === 'PDF_CORE') return ['ja', 'oni'];
+      return [appState.personFilter];
+    }
+
+    function formatDisplayForm(verb, personKey) {
+      const base = verb.forms[personKey];
+      if (verb.reflexive === 'required') return base + ' se';
+      if (verb.reflexive === 'optional') return base + ' (se)';
+      return base;
+    }
+
+    function getAcceptedAnswers(verb, personKey) {
+      const base = verb.forms[personKey].toLowerCase();
+      const pronMap = {
+        ja: ['ja'],
+        ti: ['ti'],
+        on: ['on', 'ona', 'ono'],
+        mi: ['mi'],
+        vi: ['vi'],
+        oni: ['oni', 'one', 'ona']
+      };
+      const prons = pronMap[personKey] || ['ja'];
+      const accepted = new Set();
+
+      if (verb.reflexive === 'none') {
+        accepted.add(base);
+        prons.forEach(p => accepted.add(p + ' ' + base));
+      } else if (verb.reflexive === 'required') {
+        accepted.add(base + ' se');
+        prons.forEach(p => accepted.add(p + ' se ' + base));
+      } else {
+        // optional (SE)*
+        accepted.add(base);
+        accepted.add(base + ' se');
+        accepted.add(base + ' (se)');
+        prons.forEach(p => {
+          accepted.add(p + ' ' + base);
+          accepted.add(p + ' se ' + base);
+        });
+      }
+      return Array.from(accepted);
+    }
+
+    function getClassBadgeHtml(verbClass) {
+      if (verbClass === 'A') return '<span class="class-badge-A text-xs font-semibold px-2.5 py-0.5 rounded-full">А-класс</span>';
+      if (verbClass === 'I') return '<span class="class-badge-I text-xs font-semibold px-2.5 py-0.5 rounded-full">I-класс</span>';
+      return '<span class="class-badge-E text-xs font-semibold px-2.5 py-0.5 rounded-full">Е-класс</span>';
+    }
+
+    function updateProgressBarUI() {
+      const p = appState.progress;
+      document.getElementById('statMasteredCount').textContent = p.masteredIds.length + ' / ' + VERBS_DATA.length;
+      document.getElementById('statStreakCount').textContent = String(p.streak);
+      const acc = p.totalAnswered > 0 ? Math.round((p.totalCorrect / p.totalAnswered) * 100) : 100;
+      document.getElementById('statAccuracy').textContent = acc + '%';
+      const mistakesBtn = document.getElementById('filterMistakesBtn');
+      if (mistakesBtn) {
+        mistakesBtn.textContent = 'Мои ошибки (' + p.mistakeIds.length + ')';
+      }
+    }
+
+    // ==================== NAVIGATION ====================
+    function switchTopTab(tabName) {
+      appState.activeTab = tabName;
+      const views = {
+        home: document.getElementById('viewHome'),
+        learn: document.getElementById('viewLearn'),
+        app: document.getElementById('viewApp'),
+        roadmap: document.getElementById('viewRoadmap')
+      };
+      Object.keys(views).forEach(k => {
+        if (k === tabName) views[k].classList.remove('hidden');
+        else views[k].classList.add('hidden');
+      });
+
+      const btns = {
+        home: document.getElementById('tabHomeBtn'),
+        learn: document.getElementById('tabLearnBtn'),
+        app: document.getElementById('tabAppBtn'),
+        roadmap: document.getElementById('tabRoadmapBtn')
+      };
+      Object.keys(btns).forEach(k => {
+        const b = btns[k];
+        if (!b) return;
+        if (k === tabName) {
+          b.className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition bg-sky-500 text-slate-950 shadow-sm flex items-center gap-1.5';
+        } else {
+          b.className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5';
+        }
+      });
+    }
+
+    function switchLearnMode(mode) {
+      appState.learnMode = mode;
+      const panels = {
+        write: document.getElementById('panelWrite'),
+        quiz: document.getElementById('panelQuiz'),
+        flash: document.getElementById('panelFlash'),
+        table: document.getElementById('panelTable')
+      };
+      Object.keys(panels).forEach(k => {
+        if (k === mode) panels[k].classList.remove('hidden');
+        else panels[k].classList.add('hidden');
+      });
+
+      const modeBtns = {
+        write: document.getElementById('modeWriteBtn'),
+        quiz: document.getElementById('modeQuizBtn'),
+        flash: document.getElementById('modeFlashBtn'),
+        table: document.getElementById('modeTableBtn')
+      };
+      Object.keys(modeBtns).forEach(k => {
+        if (k === mode) {
+          modeBtns[k].className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition bg-sky-500 text-slate-950 shadow';
+        } else {
+          modeBtns[k].className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white';
+        }
+      });
+
+      const pronBar = document.getElementById('pronounFilterBar');
+      if (mode === 'write' || mode === 'quiz') {
+        pronBar.classList.remove('hidden');
+      } else {
+        pronBar.classList.add('hidden');
+      }
+
+      refreshActiveLearnPanel();
+    }
+
+    function refreshActiveLearnPanel() {
+      if (appState.learnMode === 'write') pickNewWriteQuestion();
+      else if (appState.learnMode === 'quiz') pickNewQuizQuestion();
+      else if (appState.learnMode === 'flash') renderFlashcard();
+      else if (appState.learnMode === 'table') renderTable();
+    }
+
+    // ==================== WRITE MODE ====================
+    function pickNewWriteQuestion() {
+      let pool = getFilteredVerbs();
+      if (pool.length === 0) {
+        appState.classFilter = 'ALL';
+        pool = VERBS_DATA;
+      }
+      const randomVerb = pool[Math.floor(Math.random() * pool.length)];
+      const persons = getActivePersonPool();
+      const randomPerson = persons[Math.floor(Math.random() * persons.length)];
+
+      appState.currentWriteVerb = randomVerb;
+      appState.currentWritePerson = randomPerson;
+      appState.sidebarRevealed = false;
+
+      renderWriteCard();
+    }
+
+    function renderWriteCard() {
+      const v = appState.currentWriteVerb;
+      if (!v) return;
+      const pMeta = PRONOUN_META.find(p => p.key === appState.currentWritePerson) || PRONOUN_META[0];
+
+      document.getElementById('writeVerbNumber').textContent = '#' + v.id;
+      const classBadge = document.getElementById('writeVerbClassBadge');
+      classBadge.className = 'class-badge-' + v.verbClass + ' text-xs font-semibold px-2.5 py-0.5 rounded-full';
+      classBadge.textContent = v.verbClass + '-класс';
+
+      const reflBadge = document.getElementById('writeReflexiveBadge');
+      const reflHint = document.getElementById('writeReflexiveHint');
+      if (v.reflexive === 'none') {
+        reflBadge.classList.add('hidden');
+        reflHint.classList.add('hidden');
+      } else {
+        reflBadge.classList.remove('hidden');
+        reflBadge.textContent = v.reflexive === 'required' ? 'Возвратный глагол (se)*' : 'Может быть возвратным (se)*';
+        reflHint.classList.remove('hidden');
+      }
+
+      const isMastered = appState.progress.masteredIds.includes(v.id);
+      const masterBtn = document.getElementById('markMasteredWriteBtn');
+      masterBtn.textContent = isMastered ? '★ Изучено' : '☆ Отметить изученным';
+      masterBtn.className = isMastered
+        ? 'text-xs px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition'
+        : 'text-xs px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition';
+
+      document.getElementById('writeInfinitive').textContent = v.rawInfinitive;
+      document.getElementById('writeTranslation').textContent = v.ru;
+      document.getElementById('writePronounSr').textContent = pMeta.labelSr;
+      document.getElementById('writePronounRu').textContent = '(' + pMeta.labelRu + ')';
+
+      const input = document.getElementById('writeInput');
+      input.value = '';
+      input.focus();
+
+      const fb = document.getElementById('writeFeedbackBox');
+      fb.classList.add('hidden');
+      fb.innerHTML = '';
+
+      document.getElementById('writeExampleSr').textContent = v.exampleSr;
+      document.getElementById('writeExampleRu').textContent = '— ' + v.exampleRu;
+      document.getElementById('sidebarPdfJa').textContent = v.jaPdf;
+      document.getElementById('sidebarPdfOni').textContent = v.oniPdf;
+
+      renderSidebarConjugations();
+    }
+
+    function renderSidebarConjugations() {
+      const v = appState.currentWriteVerb;
+      if (!v) return;
+      const container = document.getElementById('sidebarConjugationList');
+      container.innerHTML = '';
+
+      PRONOUN_META.forEach(pm => {
+        const isTarget = pm.key === appState.currentWritePerson;
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between px-3 py-2 rounded-xl border ' +
+          (isTarget ? 'bg-sky-500/10 border-sky-500/40 text-white' : 'bg-slate-950/70 border-slate-800/80 text-slate-300');
+
+        const left = document.createElement('span');
+        left.className = 'text-xs text-slate-400';
+        left.textContent = pm.labelSr;
+
+        const right = document.createElement('span');
+        right.className = 'font-semibold';
+        if (appState.sidebarRevealed) {
+          right.textContent = formatDisplayForm(v, pm.key);
+          if (isTarget) right.className = 'font-bold text-sky-300';
+        } else {
+          right.textContent = isTarget ? '❓ (твой ответ)' : '•••';
+          right.className = 'text-slate-500 text-xs';
+        }
+
+        row.appendChild(left);
+        row.appendChild(right);
+        container.appendChild(row);
+      });
+    }
+
+    function handleWriteSubmit(e) {
+      e.preventDefault();
+      const v = appState.currentWriteVerb;
+      if (!v) return;
+      const inputEl = document.getElementById('writeInput');
+      const userRaw = inputEl.value.trim().toLowerCase().replace(/\s+/g, ' ');
+      if (!userRaw) return;
+
+      const accepted = getAcceptedAnswers(v, appState.currentWritePerson);
+      const canonical = formatDisplayForm(v, appState.currentWritePerson);
+      const fb = document.getElementById('writeFeedbackBox');
+      fb.classList.remove('hidden');
+
+      appState.progress.totalAnswered += 1;
+
+      if (accepted.includes(userRaw)) {
+        appState.progress.totalCorrect += 1;
+        appState.progress.streak += 1;
+        // Remove from mistakes if present
+        appState.progress.mistakeIds = appState.progress.mistakeIds.filter(id => id !== v.id);
+        appState.sidebarRevealed = true;
+        fb.className = 'mt-5 p-4 rounded-xl border bg-emerald-500/15 border-emerald-500/40 text-emerald-200 text-sm flex items-center justify-between gap-3';
+        fb.innerHTML = '<div><strong>✓ Отлично!</strong> Правильная форма: <code class="font-mono font-bold text-white">' + canonical + '</code></div>' +
+          '<button id="fbNextQuickBtn" type="button" class="px-3.5 py-1.5 rounded-lg bg-emerald-400 text-slate-950 font-bold text-xs shrink-0">Дальше →</button>';
+        document.getElementById('fbNextQuickBtn').addEventListener('click', pickNewWriteQuestion);
+      } else {
+        // Check if only diacritics were missed
+        const plainAccepted = accepted.map(a => stripDiacritics(a));
+        const isDiacriticNearMatch = plainAccepted.includes(stripDiacritics(userRaw));
+
+        if (isDiacriticNearMatch) {
+          appState.progress.totalCorrect += 1;
+          appState.progress.streak += 1;
+          appState.sidebarRevealed = true;
+          fb.className = 'mt-5 p-4 rounded-xl border bg-amber-500/15 border-amber-500/40 text-amber-200 text-sm flex items-center justify-between gap-3';
+          fb.innerHTML = '<div><strong>Почти идеально!</strong> Засчитано, но обрати внимание на сербскую диакритику: <code class="font-mono font-bold text-white">' + canonical + '</code></div>' +
+            '<button id="fbNextQuickBtn" type="button" class="px-3.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs shrink-0">Дальше →</button>';
+          document.getElementById('fbNextQuickBtn').addEventListener('click', pickNewWriteQuestion);
+        } else {
+          appState.progress.streak = 0;
+          if (!appState.progress.mistakeIds.includes(v.id)) {
+            appState.progress.mistakeIds.push(v.id);
+          }
+          appState.sidebarRevealed = true;
+          fb.className = 'mt-5 p-4 rounded-xl border bg-rose-500/15 border-rose-500/40 text-rose-200 text-sm flex items-center justify-between gap-3';
+          fb.innerHTML = '<div><strong>Не совсем так.</strong> Правильный ответ для <em>' + appState.currentWritePerson + '</em>: <code class="font-mono font-bold text-white">' + canonical + '</code> (добавлено в «Мои ошибки»)</div>' +
+            '<button id="fbNextQuickBtn" type="button" class="px-3.5 py-1.5 rounded-lg bg-rose-400 text-slate-950 font-bold text-xs shrink-0">Следующий →</button>';
+          document.getElementById('fbNextQuickBtn').addEventListener('click', pickNewWriteQuestion);
+        }
+      }
+
+      saveState();
+      updateProgressBarUI();
+      renderSidebarConjugations();
+    }
+
+    // ==================== QUIZ MODE (4 OPTIONS) ====================
+    function pickNewQuizQuestion() {
+      let pool = getFilteredVerbs();
+      if (pool.length === 0) {
+        appState.classFilter = 'ALL';
+        pool = VERBS_DATA;
+      }
+      const v = pool[Math.floor(Math.random() * pool.length)];
+      const persons = getActivePersonPool();
+      const person = persons[Math.floor(Math.random() * persons.length)];
+
+      appState.currentQuizVerb = v;
+      appState.currentQuizPerson = person;
+      appState.quizAnswered = false;
+
+      const pMeta = PRONOUN_META.find(p => p.key === person) || PRONOUN_META[0];
+      document.getElementById('quizVerbNumber').textContent = '#' + v.id;
+      const badge = document.getElementById('quizVerbClassBadge');
+      badge.className = 'class-badge-' + v.verbClass + ' text-xs font-semibold px-2.5 py-0.5 rounded-full';
+      badge.textContent = v.verbClass + '-класс';
+
+      document.getElementById('quizInfinitive').textContent = v.rawInfinitive;
+      document.getElementById('quizTranslation').textContent = v.ru;
+      document.getElementById('quizPronounSr').textContent = pMeta.labelSr;
+      document.getElementById('quizPronounRu').textContent = '(' + pMeta.labelRu + ')';
+      document.getElementById('quizExampleText').textContent = v.exampleSr + ' — ' + v.exampleRu;
+
+      const fb = document.getElementById('quizFeedbackBox');
+      fb.classList.add('hidden');
+      fb.innerHTML = '';
+
+      // Build 4 plausible options (correct + 3 distractors from other persons or wrong thematic vowels)
+      const correctStr = formatDisplayForm(v, person);
+      const distractors = new Set();
+
+      // Add other persons of the same verb
+      ['ja', 'ti', 'on', 'mi', 'vi', 'oni'].forEach(pk => {
+        if (pk !== person) distractors.add(formatDisplayForm(v, pk));
+      });
+
+      // Also add typical thematic vowel confusion for 3pl oni (-aju / -e / -u)
+      const stemWithoutVowel = v.forms.on.slice(0, -1);
+      const suffixSe = v.reflexive === 'required' ? ' se' : (v.reflexive === 'optional' ? ' (se)' : '');
+      if (person === 'oni') {
+        distractors.add(stemWithoutVowel + 'aju' + suffixSe);
+        distractors.add(stemWithoutVowel + 'e' + suffixSe);
+        distractors.add(stemWithoutVowel + 'u' + suffixSe);
+      }
+
+      distractors.delete(correctStr);
+      const distractorArr = Array.from(distractors).sort(() => Math.random() - 0.5).slice(0, 3);
+      const options = [correctStr, ...distractorArr].sort(() => Math.random() - 0.5);
+
+      const grid = document.getElementById('quizOptionsGrid');
+      grid.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'p-4 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-sky-500/50 text-left font-mono text-base sm:text-lg text-white font-semibold transition flex items-center justify-between';
+        btn.innerHTML = '<span>' + opt + '</span><span class="text-xs text-slate-500">Выбрать</span>';
+        btn.addEventListener('click', () => handleQuizOptionClick(btn, opt, correctStr));
+        grid.appendChild(btn);
+      });
+    }
+
+    function handleQuizOptionClick(clickedBtn, chosen, correctStr) {
+      if (appState.quizAnswered) return;
+      appState.quizAnswered = true;
+      const v = appState.currentQuizVerb;
+
+      appState.progress.totalAnswered += 1;
+      const fb = document.getElementById('quizFeedbackBox');
+      fb.classList.remove('hidden');
+
+      if (chosen === correctStr) {
+        appState.progress.totalCorrect += 1;
+        appState.progress.streak += 1;
+        clickedBtn.className = 'p-4 rounded-xl bg-emerald-500/20 border-2 border-emerald-400 text-left font-mono text-base sm:text-lg text-emerald-200 font-bold flex items-center justify-between';
+        fb.className = 'mt-6 p-4 rounded-xl border bg-emerald-500/15 border-emerald-500/40 text-emerald-200 text-sm';
+        fb.innerHTML = '<strong>✓ Верно!</strong> <code class="font-mono font-bold">' + correctStr + '</code> — правильная форма.';
+      } else {
+        appState.progress.streak = 0;
+        if (!appState.progress.mistakeIds.includes(v.id)) {
+          appState.progress.mistakeIds.push(v.id);
+        }
+        clickedBtn.className = 'p-4 rounded-xl bg-rose-500/20 border-2 border-rose-400 text-left font-mono text-base sm:text-lg text-rose-200 font-bold flex items-center justify-between';
+        fb.className = 'mt-6 p-4 rounded-xl border bg-rose-500/15 border-rose-500/40 text-rose-200 text-sm';
+        fb.innerHTML = '<strong>Ошибка.</strong> Правильный ответ: <code class="font-mono font-bold text-white">' + correctStr + '</code>.';
+      }
+
+      saveState();
+      updateProgressBarUI();
+    }
+
+    // ==================== FLASHCARDS MODE ====================
+    function renderFlashcard() {
+      let pool = getFilteredVerbs();
+      if (pool.length === 0) {
+        appState.classFilter = 'ALL';
+        pool = VERBS_DATA;
+      }
+      if (appState.flashIndex >= pool.length) appState.flashIndex = 0;
+      if (appState.flashIndex < 0) appState.flashIndex = pool.length - 1;
+
+      const v = pool[appState.flashIndex];
+      document.getElementById('flashIndexLabel').textContent = (appState.flashIndex + 1) + ' / ' + pool.length + ' (#' + v.id + ')';
+      const badge = document.getElementById('flashClassBadge');
+      badge.className = 'class-badge-' + v.verbClass + ' text-xs font-semibold px-2.5 py-0.5 rounded-full';
+      badge.textContent = v.verbClass + '-класс';
+
+      const isMastered = appState.progress.masteredIds.includes(v.id);
+      const mBtn = document.getElementById('flashMasterBtn');
+      mBtn.textContent = isMastered ? '★ Изучено' : '☆ Отметить изученным';
+      mBtn.className = isMastered
+        ? 'text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition'
+        : 'text-xs px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition';
+
+      document.getElementById('flashInfinitive').textContent = v.rawInfinitive;
+      document.getElementById('flashRu').textContent = v.ru;
+      document.getElementById('flashJaPdf').textContent = v.jaPdf;
+      document.getElementById('flashOniPdf').textContent = v.oniPdf;
+      document.getElementById('flashExampleSr').textContent = v.exampleSr;
+      document.getElementById('flashExampleRu').textContent = v.exampleRu;
+
+      const grid = document.getElementById('flashSixGrid');
+      grid.innerHTML = '';
+      PRONOUN_META.forEach(pm => {
+        const card = document.createElement('div');
+        card.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 flex flex-col justify-between';
+        card.innerHTML =
+          '<div class="text-xs text-slate-400">' + pm.labelSr + '</div>' +
+          '<div class="mt-1 text-base font-bold text-white">' + formatDisplayForm(v, pm.key) + '</div>';
+        grid.appendChild(card);
+      });
+    }
+
+    // ==================== TABLE REFERENCE MODE ====================
+    function renderTable() {
+      const pool = getFilteredVerbs();
+      const tbody = document.getElementById('verbsTableBody');
+      tbody.innerHTML = '';
+
+      if (pool.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td colspan="7" class="py-8 text-center text-slate-400">По выбранному фильтру ничего не найдено. Попробуй переключить фильтр на «Все».</td>';
+        tbody.appendChild(tr);
+        return;
+      }
+
+      pool.forEach(v => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-900/80 cursor-pointer transition';
+        const stemColor = v.verbClass === 'A' ? 'text-sky-300' : (v.verbClass === 'I' ? 'text-rose-300' : 'text-emerald-300');
+
+        tr.innerHTML =
+          '<td class="py-3 px-3 font-mono text-xs text-slate-500">' + v.id + '</td>' +
+          '<td class="py-3 px-3">' + getClassBadgeHtml(v.verbClass) + '</td>' +
+          '<td class="py-3 px-3 font-mono font-bold text-white">' + v.rawInfinitive + '</td>' +
+          '<td class="py-3 px-3 font-mono font-semibold ' + stemColor + '">' + v.jaPdf + '</td>' +
+          '<td class="py-3 px-3 font-mono font-semibold ' + stemColor + '">' + v.oniPdf + '</td>' +
+          '<td class="py-3 px-3 text-slate-200">' + v.ru + '</td>' +
+          '<td class="py-3 px-3 text-right font-mono text-xs text-sky-400">' + (appState.expandedTableVerbId === v.id ? '▲ Скрыть' : '▼ 6 форм') + '</td>';
+
+        tr.addEventListener('click', () => {
+          appState.expandedTableVerbId = appState.expandedTableVerbId === v.id ? null : v.id;
+          renderTable();
+        });
+        tbody.appendChild(tr);
+
+        if (appState.expandedTableVerbId === v.id) {
+          const detailTr = document.createElement('tr');
+          detailTr.className = 'bg-slate-950/90';
+          let pillsHtml = '';
+          PRONOUN_META.forEach(pm => {
+            pillsHtml +=
+              '<div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">' +
+              '<div class="text-[11px] text-slate-400 font-mono">' + pm.labelSr + '</div>' +
+              '<div class="text-sm font-mono font-bold text-white mt-0.5">' + formatDisplayForm(v, pm.key) + '</div>' +
+              '</div>';
+          });
+
+          detailTr.innerHTML =
+            '<td colspan="7" class="p-4 border-b border-slate-800">' +
+            '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">' + pillsHtml + '</div>' +
+            '<div class="mt-3 text-xs text-slate-300 flex flex-wrap items-center justify-between gap-2">' +
+            '<span><strong>Пример:</strong> ' + v.exampleSr + ' — <span class="text-slate-400">' + v.exampleRu + '</span></span>' +
+            '</div>' +
+            '</td>';
+          tbody.appendChild(detailTr);
+        }
+      });
+    }
+
+    // ==================== EVENT LISTENERS INIT ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Top navigation
+      document.getElementById('navBrandBtn').addEventListener('click', () => switchTopTab('home'));
+      document.getElementById('tabHomeBtn').addEventListener('click', () => switchTopTab('home'));
+      document.getElementById('tabLearnBtn').addEventListener('click', () => switchTopTab('learn'));
+      document.getElementById('tabAppBtn').addEventListener('click', () => switchTopTab('app'));
+      document.getElementById('tabRoadmapBtn').addEventListener('click', () => switchTopTab('roadmap'));
+
+      // Home CTAs
+      document.getElementById('heroStartTrainerBtn').addEventListener('click', () => switchTopTab('learn'));
+      document.getElementById('heroExploreAppBtn').addEventListener('click', () => switchTopTab('app'));
+      document.getElementById('cardGoToLearnBtn').addEventListener('click', () => switchTopTab('learn'));
+      document.getElementById('cardGoToAppBtn').addEventListener('click', () => switchTopTab('app'));
+
+      // Download Modal
+      const dlModal = document.getElementById('downloadModal');
+      document.getElementById('headerDownloadBtn').addEventListener('click', () => dlModal.classList.remove('hidden'));
+      document.getElementById('closeDownloadModalBtn').addEventListener('click', () => dlModal.classList.add('hidden'));
+      document.getElementById('modalGoToTrainerBtn').addEventListener('click', () => {
+        dlModal.classList.add('hidden');
+        switchTopTab('learn');
+      });
+
+      // Learn mode buttons
+      document.getElementById('modeWriteBtn').addEventListener('click', () => switchLearnMode('write'));
+      document.getElementById('modeQuizBtn').addEventListener('click', () => switchLearnMode('quiz'));
+      document.getElementById('modeFlashBtn').addEventListener('click', () => switchLearnMode('flash'));
+      document.getElementById('modeTableBtn').addEventListener('click', () => switchLearnMode('table'));
+
+      // Class filter buttons
+      document.querySelectorAll('.filter-class-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          appState.classFilter = btn.getAttribute('data-filter');
+          appState.flashIndex = 0;
+          document.querySelectorAll('.filter-class-btn').forEach(b => {
+            b.classList.remove('ring-2', 'ring-sky-400', 'bg-slate-800', 'text-white');
+          });
+          btn.classList.add('ring-2', 'ring-sky-400');
+          refreshActiveLearnPanel();
+        });
+      });
+
+      // Person filter buttons
+      document.querySelectorAll('.person-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          appState.personFilter = btn.getAttribute('data-person');
+          document.querySelectorAll('.person-filter-btn').forEach(b => {
+            b.className = 'person-filter-btn px-2.5 py-1 rounded-md bg-slate-900 text-slate-400 border border-slate-800 font-mono hover:text-white';
+          });
+          btn.className = 'person-filter-btn px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40 font-mono font-semibold';
+          refreshActiveLearnPanel();
+        });
+      });
+
+      // Grammar Cheat Sheet toggle
+      const cheatSheet = document.getElementById('grammarCheatSheet');
+      document.getElementById('toggleGrammarRuleBtn').addEventListener('click', () => cheatSheet.classList.toggle('hidden'));
+      document.getElementById('closeGrammarRuleBtn').addEventListener('click', () => cheatSheet.classList.add('hidden'));
+
+      // Serbian character insert buttons
+      document.querySelectorAll('.char-insert-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const ch = btn.getAttribute('data-char');
+          const input = document.getElementById('writeInput');
+          const start = input.selectionStart || input.value.length;
+          const end = input.selectionEnd || input.value.length;
+          input.value = input.value.slice(0, start) + ch + input.value.slice(end);
+          input.focus();
+          input.setSelectionRange(start + ch.length, start + ch.length);
+        });
+      });
+
+      // Write Trainer Controls
+      document.getElementById('writeForm').addEventListener('submit', handleWriteSubmit);
+      document.getElementById('nextWriteQuestionBtn').addEventListener('click', pickNewWriteQuestion);
+      document.getElementById('writeShowAnswerBtn').addEventListener('click', () => {
+        const v = appState.currentWriteVerb;
+        if (!v) return;
+        appState.sidebarRevealed = true;
+        renderSidebarConjugations();
+        const canonical = formatDisplayForm(v, appState.currentWritePerson);
+        const fb = document.getElementById('writeFeedbackBox');
+        fb.classList.remove('hidden');
+        fb.className = 'mt-5 p-4 rounded-xl border bg-sky-500/15 border-sky-500/40 text-sky-200 text-sm';
+        fb.innerHTML = '<strong>Подсказка:</strong> для лица <em>' + appState.currentWritePerson + '</em> правильная форма — <code class="font-mono font-bold text-white">' + canonical + '</code>';
+      });
+
+      document.getElementById('toggleRevealSidebarBtn').addEventListener('click', () => {
+        appState.sidebarRevealed = !appState.sidebarRevealed;
+        renderSidebarConjugations();
+      });
+
+      document.getElementById('markMasteredWriteBtn').addEventListener('click', () => {
+        const v = appState.currentWriteVerb;
+        if (!v) return;
+        const idx = appState.progress.masteredIds.indexOf(v.id);
+        if (idx === -1) appState.progress.masteredIds.push(v.id);
+        else appState.progress.masteredIds.splice(idx, 1);
+        saveState();
+        updateProgressBarUI();
+        renderWriteCard();
+      });
+
+      document.getElementById('resetProgressBtn').addEventListener('click', () => {
+        appState.progress = { masteredIds: [], mistakeIds: [], streak: 0, totalCorrect: 0, totalAnswered: 0 };
+        saveState();
+        updateProgressBarUI();
+        renderWriteCard();
+      });
+
+      // Quiz Controls
+      document.getElementById('nextQuizBtn').addEventListener('click', pickNewQuizQuestion);
+
+      // Flashcards Controls
+      document.getElementById('flashPrevBtn').addEventListener('click', () => {
+        appState.flashIndex -= 1;
+        renderFlashcard();
+      });
+      document.getElementById('flashNextBtn').addEventListener('click', () => {
+        appState.flashIndex += 1;
+        renderFlashcard();
+      });
+      document.getElementById('flashRandomBtn').addEventListener('click', () => {
+        const pool = getFilteredVerbs();
+        appState.flashIndex = Math.floor(Math.random() * Math.max(1, pool.length));
+        renderFlashcard();
+      });
+      document.getElementById('flashMasterBtn').addEventListener('click', () => {
+        const pool = getFilteredVerbs();
+        const v = pool[appState.flashIndex];
+        if (!v) return;
+        const idx = appState.progress.masteredIds.indexOf(v.id);
+        if (idx === -1) appState.progress.masteredIds.push(v.id);
+        else appState.progress.masteredIds.splice(idx, 1);
+        saveState();
+        updateProgressBarUI();
+        renderFlashcard();
+      });
+
+      // Table Search
+      document.getElementById('tableSearchInput').addEventListener('input', (e) => {
+        appState.searchQuery = e.target.value;
+        renderTable();
+      });
+
+      // Initial render
+      updateProgressBarUI();
+      switchTopTab('learn');
+      switchLearnMode('write');
+    });
+  </script>
 </body>
 </html>
